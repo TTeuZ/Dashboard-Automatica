@@ -2,9 +2,9 @@
   <v-app>
     <side-bar ref="sidebar" />
     <nav-bar @changeStateOfSideBar="changeStateOfSideBar()" />
-    <v-content>
+    <v-main>
       <nuxt />
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
@@ -15,10 +15,6 @@ export default {
   components: { sideBar, navBar },
   data: () => ({}),
   methods: {
-    async logout() {
-      await this.$auth.logout()
-      this.$router.push('/login')
-    },
     changeStateOfSideBar() {
       this.$refs.sidebar.changeStateOfSideBar()
     },
