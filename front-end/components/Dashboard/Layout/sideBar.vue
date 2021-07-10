@@ -11,8 +11,8 @@
     <v-list class="pa-0">
       <v-list-item-group>
         <v-list-item
-          v-for="item in items"
-          :key="item"
+          v-for="(item, i) in items"
+          :key="i"
           exact
           active-class="pageSelected"
           :to="{ path: item.link, query: item.query }"
