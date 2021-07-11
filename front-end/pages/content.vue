@@ -26,7 +26,6 @@ export default {
   watch: {
     entity(newValue) {
       // this.setTableData()
-      console.log(newValue)
       this.SET_PAGE_SCHEMA(newValue)
     },
   },

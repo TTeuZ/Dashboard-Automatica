@@ -24,7 +24,7 @@
             <v-list-item-title v-text="item.text" />
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="logout()">
+        <v-list-item @click="signOut()">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-icon>
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -58,6 +59,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['signOut']),
     changeStateOfSideBar() {
       this.openSideBar = true
     },
