@@ -1,9 +1,9 @@
 <template>
-  <v-container></v-container>
+  <v-app></v-app>
 </template>
 
 <script>
-export default {
-  components: {},
-}
+export default {}
 </script>
+
+<style scoped></style>

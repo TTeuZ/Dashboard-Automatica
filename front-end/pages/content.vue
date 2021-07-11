@@ -39,7 +39,6 @@ export default {
     ...mapMutations(['SET_TABLE_DATA', 'SET_LOADING', 'SET_PAGE_SCHEMA']),
     ...mapActions(['setTableData']),
   },
-  layout: 'dashboard',
 }
 </script>
 
