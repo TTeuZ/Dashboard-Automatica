@@ -45,13 +45,13 @@ export default {
         {
           icon: 'mdi-check',
           text: 'custumer',
-          link: '/dashboard/content',
+          link: '/content',
           query: { entity: 'testimony' },
         },
         {
           icon: 'mdi-check',
           text: 'service',
-          link: '/dashboard/content',
+          link: '/content',
           query: { entity: 'service' },
         },
       ],
