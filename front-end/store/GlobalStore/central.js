@@ -3,9 +3,7 @@ import schema from './schema'
 const state = {
   tableData: {},
   isDataLoading: false,
-  pageSchemaDefined: {
-    title: 'Home',
-  },
+  pageSchemaDefined: schema.modules.home,
 }
 
 const getters = {
@@ -22,7 +20,7 @@ const mutations = {
     state.isDataLoading = payload
   },
   SET_PAGE_SCHEMA: (state, payload) => {
-    state.pageSchemaDefined = schema.schemas[payload]
+    state.pageSchemaDefined = schema.modules[payload]
   },
 }
 

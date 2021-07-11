@@ -1,12 +1,15 @@
-const schemas = {
-  service: {
-    title: 'Serviços',
-  },
-  testimony: {
-    title: 'Testemunhos',
-  },
-}
+import Vue from 'vue'
+import Vuex from 'vuex'
+import home from './schemas/home'
+import testimony from './schemas/testimony'
+import service from './schemas/service'
+
+Vue.use(Vuex)
 
 export default {
-  schemas,
+  modules: {
+    home,
+    testimony,
+    service,
+  },
 }
