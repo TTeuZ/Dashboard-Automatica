@@ -14,7 +14,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
-// import vTable from '~/components/Dashboard/Table.vue'
+// import vTable from '~/components/Table.vue'
 export default {
   // components: { vTable },
   computed: {

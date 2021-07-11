@@ -15,7 +15,7 @@
           :key="i"
           exact
           active-class="pageSelected"
-          :to="{ path: item.link, query: item.query }"
+          :to="{ path: item.path, query: item.query }"
         >
           <v-list-item-icon>
             <v-icon v-text="item.icon" />
@@ -45,13 +45,13 @@ export default {
         {
           icon: 'mdi-check',
           text: 'custumer',
-          link: '/content',
+          path: '/content',
           query: { entity: 'testimony' },
         },
         {
           icon: 'mdi-check',
           text: 'service',
-          link: '/content',
+          path: '/content',
           query: { entity: 'service' },
         },
       ],

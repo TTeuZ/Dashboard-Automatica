@@ -9,27 +9,17 @@
 </template>
 
 <script>
-import sideBar from '../components/Dashboard/Layout/sideBar.vue'
-import navBar from '../components/Dashboard/Layout/navBar.vue'
+import sideBar from '../components/Layout/sideBar.vue'
+import navBar from '../components/Layout/navBar.vue'
+import { isLogged } from '../mixins/isLoggedDetector'
 export default {
   components: { sideBar, navBar },
+  mixins: [isLogged],
   data: () => ({}),
   methods: {
     changeStateOfSideBar() {
       this.$refs.sidebar.changeStateOfSideBar()
     },
-  },
-  head() {
-    return {
-      title: 'Dashboard',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Página para controlar o projeto base',
-        },
-      ],
-    }
   },
 }
 </script>
