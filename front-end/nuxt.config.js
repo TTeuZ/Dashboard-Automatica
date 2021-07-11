@@ -56,35 +56,9 @@ export default {
    */
   modules: [
     /* */
-    '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
   ],
-
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {
-    proxy: true,
-    prefix: '/api/',
-  },
-
-  proxy: {
-    '/api/': { target: 'http://127.0.0.1:8000' },
-  },
-
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'dados.token' },
-          user: { url: 'meu-perfil', method: 'get', propertyName: 'dados' },
-          logout: false,
-        },
-      },
-    },
-  },
 
   /*
    ** vuetify module configuration
