@@ -5,7 +5,10 @@
 </template>
 
 <script>
-export default {}
+import { isLogged } from '../mixins/isLoggedDetector'
+export default {
+  mixins: [isLogged],
+}
 </script>
 
 <style scoped></style>
