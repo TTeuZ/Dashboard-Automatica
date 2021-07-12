@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar class="app-bar" app color="white">
+  <v-app-bar class="app-bar" app short color="white">
     <v-app-bar-nav-icon
       v-if="isMobile"
       @click="$emit('changeStateOfSideBar')"

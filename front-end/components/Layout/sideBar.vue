@@ -38,18 +38,18 @@ export default {
       mini: true,
       items: [
         {
-          icon: 'mdi-check',
+          icon: 'mdi-home',
           text: 'Home',
           path: '/',
         },
         {
-          icon: 'mdi-check',
+          icon: 'mdi-comment-text-outline',
           text: 'Testemunhos',
           path: '/content',
           query: { entity: 'testimony' },
         },
         {
-          icon: 'mdi-check',
+          icon: 'mdi-archive',
           text: 'service',
           path: '/content',
           query: { entity: 'service' },
@@ -67,11 +67,12 @@ export default {
 
 <style script>
 .pageSelected {
-  background: linear-gradient(
-    90deg,
-    rgba(16, 230, 158, 1) 0%,
-    rgba(72, 242, 186, 1) 35%,
-    rgba(151, 247, 215, 1) 100%
+  background: -webkit-linear-gradient(
+    bottom,
+    rgba(255, 99, 71, 100) 0%,
+    rgba(255, 99, 71, 100) 5%,
+    rgba(0, 0, 0, 0) 6%,
+    rgba(0, 0, 0, 0) 100%
   );
 }
 </style>
