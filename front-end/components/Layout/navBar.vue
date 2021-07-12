@@ -8,11 +8,13 @@
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
       <v-breadcrumbs class="exo pa-0" :items="pageSchema.breadcrumbs" />
     </div>
+    <v-spacer />
+    <v-icon @click="signOut()">mdi-logout</v-icon>
   </v-app-bar>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { sizeDetector } from '../../mixins/windowSizeDetector'
 export default {
   mixins: [sizeDetector],
@@ -25,6 +27,9 @@ export default {
     pageTitle() {
       return this.pageSchema.title
     },
+  },
+  methods: {
+    ...mapActions(['signOut']),
   },
 }
 </script>

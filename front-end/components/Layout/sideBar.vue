@@ -23,19 +23,12 @@
             <v-list-item-title v-text="item.text" />
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="signOut()">
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title class="exo">Logout</v-list-item-title>
-        </v-list-item>
       </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 import { sizeDetector } from '../../mixins/windowSizeDetector'
 export default {
   mixins: [sizeDetector],
@@ -46,7 +39,12 @@ export default {
       items: [
         {
           icon: 'mdi-check',
-          text: 'custumer',
+          text: 'Home',
+          path: '/',
+        },
+        {
+          icon: 'mdi-check',
+          text: 'Testemunhos',
           path: '/content',
           query: { entity: 'testimony' },
         },
@@ -60,7 +58,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['signOut']),
     changeStateOfSideBar() {
       this.openSideBar = true
     },
