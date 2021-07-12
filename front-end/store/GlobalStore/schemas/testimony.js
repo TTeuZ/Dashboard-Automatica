@@ -1,5 +1,7 @@
 const testimony = {
   title: 'Testemunhos',
+  showAdd: true,
+  showSearch: false,
   breadcrumbs: [
     {
       text: 'Home',
@@ -11,6 +13,9 @@ const testimony = {
       disabled: true,
     },
   ],
+  table: {
+    search: '',
+  },
 }
 
 export default testimony

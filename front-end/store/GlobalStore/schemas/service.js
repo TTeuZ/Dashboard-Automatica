@@ -1,5 +1,7 @@
 const service = {
   title: 'Serviços',
+  showAdd: true,
+  showSearch: true,
   breadcrumbs: [
     {
       text: 'Home',
@@ -11,6 +13,9 @@ const service = {
       disabled: true,
     },
   ],
+  table: {
+    search: '',
+  },
 }
 
 export default service
