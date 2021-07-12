@@ -4,12 +4,14 @@ const state = {
   tableData: {},
   isDataLoading: false,
   pageSchemaDefined: schema.modules.home,
+  sideBarItems: {},
 }
 
 const getters = {
   tableData: (state) => state.tableData,
   isLoading: (state) => state.isDataLoading,
   pageSchema: (state) => state.pageSchemaDefined,
+  sideItems: (state) => state.sideBarItems,
 }
 
 const mutations = {
@@ -22,6 +24,9 @@ const mutations = {
   SET_PAGE_SCHEMA: (state, payload) => {
     state.pageSchemaDefined = schema.modules[payload]
   },
+  SET_SIDE_BAR_ITEMS: (state, items) => {
+    state.sideBarItems = items
+  },
 }
 
 const actions = {
@@ -31,6 +36,13 @@ const actions = {
     //   commit('SET_TABLE_DATA', res.data)
     //   commit('SET_LOADING', false)
     // })
+  },
+  getSideItems: ({ commit }) => {
+    const items = []
+    for (const item in schema.modules) {
+      items.push(schema.modules[item].sideBarItem)
+    }
+    commit('SET_SIDE_BAR_ITEMS', items)
   },
 }
 

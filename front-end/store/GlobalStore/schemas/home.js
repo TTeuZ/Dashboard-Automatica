@@ -1,5 +1,10 @@
 const home = {
   title: 'Home',
+  sideBarItem: {
+    icon: 'mdi-home',
+    text: 'Home',
+    path: '/',
+  },
   breadcrumbs: [
     {
       text: 'Home',

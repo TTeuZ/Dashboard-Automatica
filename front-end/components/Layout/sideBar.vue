@@ -10,7 +10,7 @@
     <v-list class="pa-0">
       <v-list-item-group>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in sideItems"
           :key="i"
           exact
           active-class="pageSelected"
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import { sizeDetector } from '../../mixins/windowSizeDetector'
 export default {
   mixins: [sizeDetector],
@@ -36,28 +37,16 @@ export default {
     return {
       openSideBar: true,
       mini: true,
-      items: [
-        {
-          icon: 'mdi-home',
-          text: 'Home',
-          path: '/',
-        },
-        {
-          icon: 'mdi-comment-text-outline',
-          text: 'Testemunhos',
-          path: '/content',
-          query: { entity: 'testimony' },
-        },
-        {
-          icon: 'mdi-archive',
-          text: 'service',
-          path: '/content',
-          query: { entity: 'service' },
-        },
-      ],
     }
   },
+  computed: {
+    ...mapGetters(['sideItems']),
+  },
+  mounted() {
+    this.getSideItems()
+  },
   methods: {
+    ...mapActions(['getSideItems']),
     changeStateOfSideBar() {
       this.openSideBar = true
     },
