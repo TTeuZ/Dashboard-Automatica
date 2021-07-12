@@ -20,7 +20,7 @@ export const sizeDetector = {
       this.handlerMobileState()
     },
     handlerMobileState() {
-      this.isMobile = this.actualSize < 1024
+      this.isMobile = this.actualSize < 1264
     },
   },
 }
