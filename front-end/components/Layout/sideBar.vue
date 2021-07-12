@@ -2,11 +2,10 @@
   <v-navigation-drawer
     v-model="openSideBar"
     app
-    :expand-on-hover="$vuetify.breakpoint.lgAndUp"
+    :expand-on-hover="!isMobile"
     :mini-variant.sync="mini"
     color="white"
     overlay-opacity="0"
-    disable-resize-watcher
   >
     <v-list class="pa-0">
       <v-list-item-group>
@@ -37,7 +36,9 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { sizeDetector } from '../../mixins/windowSizeDetector'
 export default {
+  mixins: [sizeDetector],
   data() {
     return {
       openSideBar: true,

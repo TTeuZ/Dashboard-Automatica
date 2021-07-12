@@ -1,16 +1,21 @@
 <template>
   <v-app-bar class="app-bar" app color="white">
     <v-app-bar-nav-icon
-      v-if="$vuetify.breakpoint.mdAndDown"
+      v-if="isMobile"
       @click="$emit('changeStateOfSideBar')"
     ></v-app-bar-nav-icon>
-    <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
+    <div>
+      <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
+      <v-breadcrumbs class="exo pa-0" :items="pageSchema.breadcrumbs" />
+    </div>
   </v-app-bar>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { sizeDetector } from '../../mixins/windowSizeDetector'
 export default {
+  mixins: [sizeDetector],
   openSideBar: {
     required: true,
     type: Boolean,
