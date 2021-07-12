@@ -12,8 +12,6 @@ export const isLogged = {
     // Middleware de verificação de esta logado
     if (!this.isAuthenticated) {
       this.sendTo('/login')
-    } else {
-      this.sendTo('/')
     }
   },
   watch: {
