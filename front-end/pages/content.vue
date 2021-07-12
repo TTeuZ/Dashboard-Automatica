@@ -1,31 +1,34 @@
 <template>
   <v-container fluid>
-    <v-row class="pa-0 ma-0">
-      <v-col cols="12" class="header">
-        <span>{{ pageSchema.title }}</span>
-        <span>{{ tableData }}</span>
+    <v-row class="pa-0 ma-0 header d-flex">
+      <v-col cols="12" md="12" lg="6" class="d-flex align-center">
+        <addBtn v-if="pageSchema.showAdd"
+      /></v-col>
+      <v-col cols="12" md="12" lg="6" class="d-flex align-center">
+        <search v-if="pageSchema.showSearch" />
       </v-col>
-      <v-col cols="12">
-        <!-- <vTable v-if="!isLoading" /> -->
-      </v-col>
+    </v-row>
+    <v-row class="pa-0 ma-0" no-gutters>
+      <vtable />
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapActions } from 'vuex'
-// import vTable from '~/components/Table.vue'
+import { mapGetters, mapMutations } from 'vuex'
+import addBtn from '../components/header/addBtn.vue'
+import search from '../components/header/search.vue'
+import vtable from '~/components/Table.vue'
 export default {
-  // components: { vTable },
+  components: { addBtn, search, vtable },
   computed: {
-    ...mapGetters(['tableData', 'isLoading', 'pageSchema']),
+    ...mapGetters(['isLoading', 'pageSchema']),
     entity() {
       return this.$route.query.entity
     },
   },
   watch: {
     entity(newValue) {
-      // this.setTableData()
       this.SET_PAGE_SCHEMA(newValue)
     },
   },
@@ -35,10 +38,15 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_TABLE_DATA', 'SET_LOADING', 'SET_PAGE_SCHEMA']),
-    ...mapActions(['setTableData']),
+    ...mapMutations(['SET_PAGE_SCHEMA']),
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+@media screen and (max-width: 1265px) {
+  .header {
+    flex-direction: column-reverse;
+  }
+}
+</style>
