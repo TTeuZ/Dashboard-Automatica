@@ -3,10 +3,10 @@ const testimony = {
   showAdd: true,
   showSearch: false,
   sideBarItem: {
-    icon: 'mdi-archive',
-    text: 'service',
+    icon: 'mdi-comment-text-outline',
+    text: 'Testemunhos',
     path: '/content',
-    query: { entity: 'service' },
+    query: { entity: 'testimony' },
   },
   breadcrumbs: [
     {
@@ -20,7 +20,15 @@ const testimony = {
     },
   ],
   table: {
+    headers: [],
+    items: [],
     search: '',
+    itemsPerPage: 15,
+    multiSort: true,
+    mobileBreakPoint: 900,
+    noDataText: 'sem testemunhos',
+    noResultText: 'Não existe esse testemunho',
+    dense: false,
   },
 }
 

@@ -3,7 +3,7 @@ import schema from './schema'
 const state = {
   tableData: {},
   isDataLoading: false,
-  pageSchemaDefined: schema.modules.home,
+  pageSchemaDefined: schema.modules.loading,
   sideBarItems: {},
 }
 
@@ -40,7 +40,9 @@ const actions = {
   getSideItems: ({ commit }) => {
     const items = []
     for (const item in schema.modules) {
-      items.push(schema.modules[item].sideBarItem)
+      if (item !== 'loading') {
+        items.push(schema.modules[item].sideBarItem)
+      }
     }
     commit('SET_SIDE_BAR_ITEMS', items)
   },
