@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    v-model="pageSchema.table.search"
+    v-model="search"
     label="O que procura?"
     color="#FF6347"
     dense
@@ -16,8 +16,20 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data() {
+    return {
+      search: '',
+    }
+  },
   computed: {
     ...mapGetters(['pageSchema']),
+  },
+  watch: {
+    search: {
+      handler(newValue) {
+        this.$emit('change', newValue)
+      },
+    },
   },
 }
 </script>

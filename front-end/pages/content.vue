@@ -5,11 +5,11 @@
         <addBtn v-if="pageSchema.showAdd"
       /></v-col>
       <v-col cols="12" md="12" lg="6" class="d-flex align-center">
-        <search v-if="pageSchema.showSearch" />
+        <search v-if="pageSchema.showSearch" @change="sendSearch($event)" />
       </v-col>
     </v-row>
     <v-row class="pa-0 ma-0" no-gutters>
-      <vtable />
+      <vtable ref="table" />
     </v-row>
   </v-container>
 </template>
@@ -39,6 +39,9 @@ export default {
   },
   methods: {
     ...mapMutations(['SET_PAGE_SCHEMA']),
+    sendSearch(search) {
+      this.$refs.table.search = search
+    },
   },
 }
 </script>
