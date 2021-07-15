@@ -1,5 +1,6 @@
 const service = {
   title: 'Serviços',
+  name: 'Serviço',
   showAdd: true,
   showSearch: true,
   sideBarItem: {
@@ -40,23 +41,6 @@ const service = {
         align: 'start',
       },
     ],
-    items: [
-      {
-        name: 'teste',
-        email: 'teste@teste.com',
-        message: 'teste teste',
-      },
-      {
-        name: 'teste',
-        email: 'teste@teste.com',
-        message: 'teste teste',
-      },
-      {
-        name: 'teste',
-        email: 'teste@teste.com',
-        message: 'teste teste',
-      },
-    ],
     search: '',
     itemsPerPage: 15,
     multiSort: true,
@@ -65,6 +49,44 @@ const service = {
     noResultText: 'Não existe esse serviço',
     dense: false,
   },
+  form: [
+    {
+      key: 'name',
+      label: 'Nome do Serviço',
+      value: '',
+      component: {
+        type: 'textInput',
+        componentConfig: {
+          rules: 'regras de validação do componente',
+          // *regras especificas do tipo do componente*
+        },
+      },
+    },
+    {
+      key: 'note',
+      label: 'Descrição do serviço',
+      value: '',
+      component: {
+        type: 'inputArea',
+        componentConfig: {
+          rules: 'regras de validação do componente',
+          // *regras especificas do tipo do componente*
+        },
+      },
+    },
+    {
+      key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
+      label: 'Imagem do serviço',
+      value: '',
+      component: {
+        type: 'upload',
+        componentConfig: {
+          rules: 'regras de validação do componente',
+          // *regras especificas do tipo do componente*
+        },
+      },
+    },
+  ],
 }
 
 export default service
