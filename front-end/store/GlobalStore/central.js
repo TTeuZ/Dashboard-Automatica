@@ -12,6 +12,7 @@ const getters = {
   isLoading: (state) => state.isDataLoading,
   pageSchema: (state) => state.pageSchemaDefined,
   sideItems: (state) => state.sideBarItems,
+  pageFormSchema: (state) => state.pageSchemaDefined.form,
 }
 
 const mutations = {
@@ -26,6 +27,9 @@ const mutations = {
   },
   SET_SIDE_BAR_ITEMS: (state, items) => {
     state.sideBarItems = items
+  },
+  SET_INPUT_VALUE: (state, form) => {
+    state.pageSchemaDefined.form[form.item].value = form.value
   },
 }
 
@@ -45,6 +49,13 @@ const actions = {
       }
     }
     commit('SET_SIDE_BAR_ITEMS', items)
+  },
+  setValue: ({ state, commit }, { formKey, value }) => {
+    for (const item in state.pageSchemaDefined.form) {
+      if (state.pageSchemaDefined.form[item].key === formKey) {
+        commit('SET_INPUT_VALUE', { item, value })
+      }
+    }
   },
 }
 
