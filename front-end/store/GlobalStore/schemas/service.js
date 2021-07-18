@@ -52,39 +52,25 @@ const service = {
   form: [
     {
       key: 'name',
+      type: 'textInput',
+      mask: '',
       label: 'Nome do Serviço',
+      rules: [(v) => !!v || 'Nome é obrigatorio'], // *regras especificas do tipo do componente*
       value: '',
-      component: {
-        type: 'textInput',
-        componentConfig: {
-          rules: 'regras de validação do componente',
-          // *regras especificas do tipo do componente*
-        },
-      },
     },
     {
       key: 'note',
+      type: 'inputArea',
       label: 'Descrição do serviço',
+      rules: [], // *regras especificas do tipo do componente*
       value: '',
-      component: {
-        type: 'inputArea',
-        componentConfig: {
-          rules: 'regras de validação do componente',
-          // *regras especificas do tipo do componente*
-        },
-      },
     },
     {
       key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
+      type: 'upload',
       label: 'Imagem do serviço',
+      rules: [], // *regras especificas do tipo do componente*
       value: '',
-      component: {
-        type: 'upload',
-        componentConfig: {
-          rules: 'regras de validação do componente',
-          // *regras especificas do tipo do componente*
-        },
-      },
     },
   ],
 }
