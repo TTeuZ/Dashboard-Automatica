@@ -10,7 +10,7 @@
       <v-card-title class="card__title exo">
         {{ handlerTitle }}
       </v-card-title>
-      <form-constructor :form-fields="pageSchema.form" />
+      <form-constructor ref="constructor" :form-fields="pageSchema.form" />
       <v-divider />
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     cancel() {
+      this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
     },
   },

@@ -1,18 +1,18 @@
 <template>
-  <v-row no-gutters>
-    <v-col
+  <v-form
+    ref="form"
+    v-model="valid"
+    class="justify__content pt-4"
+    lazy-validation
+  >
+    <component
+      :is="field.type"
       v-for="(field, f) in formFields"
       :key="f"
-      cols="12"
-      class="py-1 px-0 component__wrapper"
-    >
-      <component
-        :is="field.component.type"
-        v-model="field.value"
-        :component-config="field.component.componentConfig"
-      />
-    </v-col>
-  </v-row>
+      class="component__wrapper"
+      :component="field"
+    />
+  </v-form>
 </template>
 
 <script>
@@ -29,13 +29,22 @@ export default {
       required: true,
     },
   },
+  methods: {
+    clearForm() {
+      this.$refs.form.reset()
+    },
+  },
 }
 </script>
 
 <style scoped>
-.component__wrapper {
+.justify__content {
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
+}
+.component__wrapper {
+  width: 90%;
 }
 </style>
