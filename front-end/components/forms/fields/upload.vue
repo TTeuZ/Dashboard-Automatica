@@ -1,9 +1,41 @@
 <template>
-  <div>upload</div>
+  <v-file-input
+    v-model="inputData"
+    :label="component.label"
+    :color="component.color"
+    :accept="component.extension"
+    :rules="component.rules"
+    dense
+    show-size
+    counter
+    chips
+    multiple
+    outlined
+    rounded
+    required
+    clearable
+    @blur="sendValue(component.key)"
+  >
+    <template v-slot:selection="{ text }">
+      <v-chip small label :color="component.colorChip">
+        {{ text }}
+      </v-chip>
+    </template>
+  </v-file-input>
 </template>
 
 <script>
-export default {}
+import { form } from '~/mixins/forms'
+export default {
+  mixins: [form],
+  props: {
+    component: {
+      type: Object,
+      Required: true,
+      default: () => {},
+    },
+  },
+}
 </script>
 
 <style scoped></style>
