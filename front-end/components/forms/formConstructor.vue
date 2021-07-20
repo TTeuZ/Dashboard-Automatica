@@ -1,10 +1,5 @@
 <template>
-  <v-form
-    ref="form"
-    v-model="valid"
-    class="justify__content pt-4"
-    lazy-validation
-  >
+  <v-form ref="form" class="justify__content pt-4" lazy-validation>
     <component
       :is="field.type"
       v-for="(field, f) in formFields"
@@ -18,11 +13,10 @@
 <script>
 import upload from '~/components/forms/fields/upload'
 import inputArea from '~/components/forms/fields/inputArea'
-import select from '~/components/forms/fields/select'
-import combobox from '~/components/forms/fields/combobox'
+import vSelect from '~/components/forms/fields/select'
 import textInput from '~/components/forms/fields/input'
 export default {
-  components: { upload, inputArea, select, combobox, textInput },
+  components: { upload, inputArea, vSelect, textInput },
   props: {
     formFields: {
       type: Array,
