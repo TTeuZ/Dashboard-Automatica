@@ -1,5 +1,6 @@
 const testimony = {
   title: 'Testemunhos',
+  name: 'testimony',
   showAdd: true,
   showSearch: false,
   sideBarItem: {
@@ -30,6 +31,51 @@ const testimony = {
     noResultText: 'Não existe esse testemunho',
     dense: false,
   },
+  form: [
+    {
+      key: 'name', // nome que vai para o bacno de dados
+      type: 'textInput',
+      mask: '',
+      label: 'Nome do Serviço',
+      rules: [(v) => !!v || 'Nome é obrigatorio'], // *regras especificas do tipo do componente*
+      value: '',
+    },
+    {
+      key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
+      type: 'upload',
+      label: 'Imagem do serviço',
+      rules: [(v) => !!v || 'Descrição é obrigatorio'],
+      value: '',
+    },
+    {
+      key: 'note',
+      type: 'inputArea',
+      label: 'Descrição do serviço',
+      extension: '.pdf', // Extensões que o input pode aceitar.
+      colorChip: 'orange',
+      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
+      value: '',
+    },
+    {
+      key: 'items',
+      type: 'vSelect',
+      label: 'selecione o item',
+      isMultiple: false,
+      dataCameFromOtside: false,
+      items: [
+        {
+          label: 'teste',
+          value: 1,
+        },
+        {
+          label: 'teste2',
+          value: 2,
+        }, // pode ser preenchido pelo back caso necessário
+      ],
+      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
+      value: '',
+    },
+  ],
 }
 
 export default testimony

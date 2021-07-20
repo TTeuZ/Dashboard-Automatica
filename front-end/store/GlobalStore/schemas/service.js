@@ -1,6 +1,6 @@
 const service = {
   title: 'Serviços',
-  name: 'Serviço',
+  name: 'service',
   showAdd: true,
   showSearch: true,
   sideBarItem: {
@@ -51,7 +51,7 @@ const service = {
   },
   form: [
     {
-      key: 'name',
+      key: 'name', // nome que vai para o bacno de dados
       type: 'textInput',
       mask: '',
       label: 'Nome do Serviço',
@@ -59,17 +59,38 @@ const service = {
       value: '',
     },
     {
-      key: 'note',
-      type: 'inputArea',
-      label: 'Descrição do serviço',
-      rules: [], // *regras especificas do tipo do componente*
-      value: '',
-    },
-    {
       key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
       type: 'upload',
       label: 'Imagem do serviço',
-      rules: [], // *regras especificas do tipo do componente*
+      rules: [(v) => !!v || 'Descrição é obrigatorio'],
+      value: '',
+    },
+    {
+      key: 'note',
+      type: 'inputArea',
+      label: 'Descrição do serviço',
+      extension: '.pdf', // Extensões que o input pode aceitar.
+      colorChip: 'orange',
+      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
+      value: '',
+    },
+    {
+      key: 'items',
+      type: 'vSelect',
+      label: 'selecione o item',
+      isMultiple: false,
+      dataCameFromOtside: false,
+      items: [
+        {
+          label: 'teste',
+          value: 1,
+        },
+        {
+          label: 'teste2',
+          value: 2,
+        }, // pode ser preenchido pelo back caso necessário
+      ],
+      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
     },
   ],
