@@ -1,7 +1,7 @@
 export const form = {
   data() {
     return {
-      inputData: '',
+      inputData: null,
     }
   },
   methods: {
