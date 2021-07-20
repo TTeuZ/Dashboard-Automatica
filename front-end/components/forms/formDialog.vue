@@ -24,7 +24,14 @@
         >
           Sair
         </v-btn>
-        <v-btn color="success" text rounded depressed outlined @click="cancel">
+        <v-btn
+          color="success"
+          text
+          rounded
+          depressed
+          outlined
+          @click="prepareToSave"
+        >
           Salvar
         </v-btn>
       </v-card-actions>
@@ -35,6 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import formConstructor from '../forms/formConstructor.vue'
+import { database } from '~/store/Api/firebase'
 export default {
   components: { formConstructor },
   props: {
@@ -72,6 +80,25 @@ export default {
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
+    },
+    prepareToSave() {
+      const values = {}
+      if (this.$refs.constructor.$refs.form.validate()) {
+        this.pageSchema.form.forEach((item) => {
+          values[item.key] = item.value
+        })
+      }
+      this.save(values)
+    },
+    save(data) {
+      database
+        .child(`${this.pageSchema.name}`)
+        .push()
+        .set(data)
+        .then(() => {
+          this.$refs.constructor.clearForm()
+          this.$emit('update:isOpen', false)
+        })
     },
   },
 }
