@@ -1,5 +1,5 @@
 const testimony = {
-  title: 'Testemunhos',
+  title: 'Testemunho',
   name: 'testimony',
   showAdd: true,
   showSearch: false,

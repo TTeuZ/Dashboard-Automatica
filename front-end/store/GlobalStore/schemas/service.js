@@ -1,5 +1,5 @@
 const service = {
-  title: 'Serviços',
+  title: 'Serviço',
   name: 'service',
   showAdd: true,
   showSearch: true,
@@ -59,19 +59,20 @@ const service = {
       value: '',
     },
     {
-      key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
+      key: 'file', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
       type: 'upload',
       label: 'Imagem do serviço',
-      rules: [(v) => !!v || 'Descrição é obrigatorio'],
+      multiple: false,
+      extension: '.png, .jpg', // Extensões que o input pode aceitar.
+      colorChip: 'orange',
+      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
     },
     {
       key: 'note',
       type: 'inputArea',
       label: 'Descrição do serviço',
-      extension: '.pdf', // Extensões que o input pode aceitar.
-      colorChip: 'orange',
-      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
+      rules: [(v) => !!v || 'Descrição é obrigatorio'],
       value: '',
     },
     {
