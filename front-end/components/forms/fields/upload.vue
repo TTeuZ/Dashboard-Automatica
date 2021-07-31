@@ -5,11 +5,11 @@
     :color="component.color"
     :accept="component.extension"
     :rules="component.rules"
+    :multiple="component.multiple"
     dense
     show-size
     counter
     chips
-    multiple
     outlined
     rounded
     required
