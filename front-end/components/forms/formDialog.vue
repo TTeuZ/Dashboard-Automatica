@@ -42,7 +42,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import formConstructor from '../forms/formConstructor.vue'
-import { database } from '~/store/Api/firebase'
+import { database, storage } from '~/store/Api/firebase'
 export default {
   components: { formConstructor },
   props: {
@@ -58,14 +58,15 @@ export default {
   data() {
     return {
       isPageSchemaLoaded: false,
+      files: null,
     }
   },
   computed: {
     ...mapGetters(['pageSchema']),
     handlerTitle() {
       return this.method === 'create'
-        ? `Adicione um ${this.pageSchema.name}`
-        : `Atualize o ${this.pageSchema.name}`
+        ? `Adicione um ${this.pageSchema.title}`
+        : `Atualize o ${this.pageSchema.title}`
     },
   },
   watch: {
@@ -81,21 +82,42 @@ export default {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
     },
+    handlerUploadedFiles(item, id) {
+      item.value.forEach((file) => {
+        storage
+          .child(`${file.name}`)
+          .put(file)
+          .then(() => {
+            storage
+              .child(`${file.name}`)
+              .getDownloadURL()
+              .then((res) => {
+                database.child(`${this.pageSchema.name}/${id}/files`).push(res)
+              })
+          })
+      })
+    },
     prepareToSave() {
       const values = {}
       if (this.$refs.constructor.$refs.form.validate()) {
         this.pageSchema.form.forEach((item) => {
-          values[item.key] = item.value
+          if (item.type !== 'upload') {
+            values[item.key] = item.value
+          } else {
+            this.files = item
+          }
         })
+        this.save(values)
       }
-      this.save(values)
     },
     save(data) {
       database
         .child(`${this.pageSchema.name}`)
-        .push()
-        .set(data)
-        .then(() => {
+        .push(data)
+        .then((res) => {
+          if (this.files !== null) {
+            this.handlerUploadedFiles(this.files, res.key)
+          }
           this.$refs.constructor.clearForm()
           this.$emit('update:isOpen', false)
         })
