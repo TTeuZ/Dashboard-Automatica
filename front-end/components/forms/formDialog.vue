@@ -58,6 +58,7 @@ export default {
   data() {
     return {
       isPageSchemaLoaded: false,
+      selectOptionsTrigger: false,
       files: null,
     }
   },
@@ -73,15 +74,20 @@ export default {
     pageSchema: {
       handler() {
         this.isPageSchemaLoaded = true
+        this.selectOptionsTrigger = true
       },
     },
-    isPageSchemaLoaded: {
+    selectOptionsTrigger: {
       handler() {
-        this.pageSchema.form.forEach((field, index) => {
-          if (field.type === 'vSelect') {
-            if (field.dataCameFromOtside) this.getDataFromOutside(field, index)
-          }
-        })
+        if (this.selectOptionsTrigger) {
+          this.pageSchema.form.forEach((field, index) => {
+            if (field.type === 'vSelect') {
+              if (field.dataCameFromOtside)
+                this.getDataFromOutside(field, index)
+            }
+          })
+        }
+        this.selectOptionsTrigger = false
       },
     },
   },
