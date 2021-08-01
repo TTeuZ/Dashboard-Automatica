@@ -71,9 +71,17 @@ export default {
   },
   watch: {
     pageSchema: {
-      deep: true,
       handler() {
         this.isPageSchemaLoaded = true
+      },
+    },
+    isPageSchemaLoaded: {
+      handler() {
+        this.pageSchema.form.forEach((field, index) => {
+          if (field.type === 'vSelect') {
+            if (field.dataCameFromOtside) this.getDataFromOutside(field, index)
+          }
+        })
       },
     },
   },
@@ -81,6 +89,15 @@ export default {
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
+    },
+    getDataFromOutside(field, index) {
+      database.child(field.dataFont).on('value', (snap) =>
+        this.$store.dispatch('handlerSelectOptions', {
+          items: snap.val(),
+          label: field.dataLabel,
+          index,
+        })
+      )
     },
     handlerUploadedFiles(item, id) {
       item.value.forEach((file) => {

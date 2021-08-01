@@ -29,11 +29,6 @@ export default {
       default: () => {},
     },
   },
-  methods: {
-    getDataFromOutside() {
-      // fazer função que vai pegar data de rotas do firebase.
-    },
-  },
 }
 </script>
 

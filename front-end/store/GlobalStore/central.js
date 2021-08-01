@@ -31,16 +31,12 @@ const mutations = {
   SET_INPUT_VALUE: (state, form) => {
     state.pageSchemaDefined.form[form.item].value = form.value
   },
+  SET_SELECT_OPTIONS: (state, form) => {
+    state.pageSchemaDefined.form[form.index].items = form.options
+  },
 }
 
 const actions = {
-  setTableData: async ({ commit, state }) => {
-    // commit('SET_LOADING', true)
-    // await this.$axios.get(state.entity).then((res) => {
-    //   commit('SET_TABLE_DATA', res.data)
-    //   commit('SET_LOADING', false)
-    // })
-  },
   getSideItems: ({ commit }) => {
     const items = []
     for (const item in schema.modules) {
@@ -56,6 +52,16 @@ const actions = {
         commit('SET_INPUT_VALUE', { item, value })
       }
     }
+  },
+  handlerSelectOptions: ({ commit }, { items, label, index }) => {
+    const options = []
+    for (const item in items) {
+      options.push({
+        label: items[item][label],
+        value: item,
+      })
+    }
+    commit('SET_SELECT_OPTIONS', { index, options })
   },
 }
 
