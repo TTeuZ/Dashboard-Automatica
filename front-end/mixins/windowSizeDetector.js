@@ -2,12 +2,12 @@ export const sizeDetector = {
   data() {
     return {
       actualSize: 0,
-      isMobile: false,
+      isMobileWindow: false,
     }
   },
   computed: {
     isMobile() {
-      return this.isMobile
+      return this.isMobileWindow
     },
   },
   mounted() {
@@ -20,7 +20,7 @@ export const sizeDetector = {
       this.handlerMobileState()
     },
     handlerMobileState() {
-      this.isMobile = this.actualSize < 1264
+      this.isMobileWindow = this.actualSize < 1264
     },
   },
 }
