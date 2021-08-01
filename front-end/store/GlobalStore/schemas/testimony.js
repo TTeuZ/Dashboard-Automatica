@@ -36,21 +36,14 @@ const testimony = {
       key: 'name', // nome que vai para o bacno de dados
       type: 'textInput',
       mask: '',
-      label: 'Nome do Serviço',
+      label: 'Nome do Testemunho',
       rules: [(v) => !!v || 'Nome é obrigatorio'], // *regras especificas do tipo do componente*
-      value: '',
-    },
-    {
-      key: 'image', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
-      type: 'upload',
-      label: 'Imagem do serviço',
-      rules: [(v) => !!v || 'Descrição é obrigatorio'],
       value: '',
     },
     {
       key: 'note',
       type: 'inputArea',
-      label: 'Descrição do serviço',
+      label: 'Descrição do Testemunho',
       extension: '.pdf', // Extensões que o input pode aceitar.
       colorChip: 'orange',
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],

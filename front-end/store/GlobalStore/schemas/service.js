@@ -62,7 +62,7 @@ const service = {
       key: 'file', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
       type: 'upload',
       label: 'Imagem do serviço',
-      multiple: false,
+      multiple: true,
       extension: '.png, .jpg', // Extensões que o input pode aceitar.
       colorChip: 'orange',
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
@@ -75,22 +75,34 @@ const service = {
       rules: [(v) => !!v || 'Descrição é obrigatorio'],
       value: '',
     },
+    // {
+    //   key: 'items',
+    //   type: 'vSelect',
+    //   label: 'selecione o item',
+    //   isMultiple: false,
+    //   dataCameFromOtside: false,
+    //   items: [
+    //     {
+    //       label: 'teste',
+    //       value: 1,
+    //     },
+    //     {
+    //       label: 'teste2',
+    //       value: 2,
+    //     }, // pode ser preenchido pelo back caso necessário
+    //   ],
+    //   rules: [(v) => !!v || 'O arquivo é obrigatorio'],
+    //   value: '',
+    // },
     {
       key: 'items',
       type: 'vSelect',
       label: 'selecione o item',
       isMultiple: false,
-      dataCameFromOtside: false,
-      items: [
-        {
-          label: 'teste',
-          value: 1,
-        },
-        {
-          label: 'teste2',
-          value: 2,
-        }, // pode ser preenchido pelo back caso necessário
-      ],
+      dataCameFromOtside: true, // indica que as infos vão vir de uma rota
+      dataFont: 'testimony', // nome da entity que vai ser chamada
+      dataLabel: 'name', // valor que vai ser apresentado no label das opções
+      items: null,
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
     },
