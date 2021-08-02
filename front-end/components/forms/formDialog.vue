@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-if="isPageSchemaLoaded"
+    v-if="!isLoading"
     v-model="isOpen"
     persistent
     overlay-opacity="0"
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import formConstructor from '../forms/formConstructor.vue'
 import { database, storage } from '~/store/Api/firebase'
 export default {
@@ -57,13 +57,12 @@ export default {
   },
   data() {
     return {
-      isPageSchemaLoaded: false,
       selectOptionsTrigger: false,
       files: null,
     }
   },
   computed: {
-    ...mapGetters(['pageSchema']),
+    ...mapGetters(['pageSchema', 'isLoading']),
     handlerTitle() {
       return this.method === 'create'
         ? `Adicione um ${this.pageSchema.title}`
@@ -73,7 +72,7 @@ export default {
   watch: {
     pageSchema: {
       handler() {
-        this.isPageSchemaLoaded = true
+        this.SET_LOADING(false)
         this.selectOptionsTrigger = true
       },
     },
@@ -92,6 +91,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['SET_LOADING']),
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)

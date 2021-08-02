@@ -2,7 +2,7 @@ import schema from './schema'
 
 const state = {
   tableData: {},
-  isDataLoading: false,
+  isDataLoading: true,
   pageSchemaDefined: schema.modules.loading,
   sideBarItems: {},
 }

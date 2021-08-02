@@ -1,26 +1,32 @@
 <template>
   <v-container fluid>
-    <v-row class="pa-0 ma-0 header d-flex">
-      <v-col cols="12" md="12" lg="6" class="d-flex align-center">
-        <addBtn v-if="pageSchema.showAdd"
-      /></v-col>
-      <v-col cols="12" md="12" lg="6" class="d-flex align-center">
-        <search v-if="pageSchema.showSearch" @change="sendSearch($event)" />
-      </v-col>
-    </v-row>
-    <v-row class="pa-0 ma-0" no-gutters>
-      <vtable ref="table" />
-    </v-row>
+    <div v-if="!isLoading">
+      <v-row class="pa-0 ma-0 header d-flex">
+        <v-col cols="12" md="12" lg="6" class="d-flex align-center">
+          <addBtn v-if="pageSchema.showAdd"
+        /></v-col>
+        <v-col cols="12" md="12" lg="6" class="d-flex align-center">
+          <search v-if="pageSchema.showSearch" @change="sendSearch($event)" />
+        </v-col>
+      </v-row>
+      <v-row class="pa-0 ma-0" no-gutters>
+        <vtable ref="table" />
+      </v-row>
+    </div>
+    <div v-else class="loading__gif">
+      <self-building-square-spinner />
+    </div>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 import addBtn from '../components/header/addBtn.vue'
 import search from '../components/header/search.vue'
 import vtable from '~/components/Table.vue'
 export default {
-  components: { addBtn, search, vtable },
+  components: { SelfBuildingSquareSpinner, addBtn, search, vtable },
   computed: {
     ...mapGetters(['isLoading', 'pageSchema']),
     entity() {
@@ -31,6 +37,11 @@ export default {
     entity(newValue) {
       this.SET_PAGE_SCHEMA(newValue)
     },
+    pageSchema: {
+      handler() {
+        this.SET_LOADING(false)
+      },
+    },
   },
   mounted() {
     if (this.entity) {
@@ -38,7 +49,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_PAGE_SCHEMA']),
+    ...mapMutations(['SET_PAGE_SCHEMA', 'SET_LOADING']),
     sendSearch(search) {
       this.$refs.table.search = search
     },
@@ -47,6 +58,12 @@ export default {
 </script>
 
 <style scoped>
+.loading__gif {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 @media screen and (max-width: 1265px) {
   .header {
     flex-direction: column-reverse;
