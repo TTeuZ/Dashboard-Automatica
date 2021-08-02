@@ -27,7 +27,7 @@ const testimony = {
     itemsPerPage: 15,
     multiSort: true,
     mobileBreakPoint: 900,
-    noDataText: 'sem testemunhos',
+    noDataText: 'Sem testemunhos',
     noResultText: 'Não existe esse testemunho',
     dense: false,
   },

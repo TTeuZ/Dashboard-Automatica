@@ -45,7 +45,7 @@ const service = {
     itemsPerPage: 15,
     multiSort: true,
     mobileBreakPoint: 900,
-    noDataText: 'sem serviços',
+    noDataText: 'Sem serviços',
     noResultText: 'Não existe esse serviço',
     dense: false,
   },
