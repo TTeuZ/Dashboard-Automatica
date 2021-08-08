@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <snack-alert />
     <side-bar ref="sidebar" />
     <nav-bar @changeStateOfSideBar="changeStateOfSideBar()" />
     <v-main>
@@ -9,11 +10,12 @@
 </template>
 
 <script>
-import sideBar from '../components/Layout/sideBar.vue'
-import navBar from '../components/Layout/navBar.vue'
 import { isLogged } from '../mixins/isLoggedDetector'
+import sideBar from '~/components/Layout/sideBar.vue'
+import navBar from '~/components/Layout/navBar.vue'
+import SnackAlert from '~/components/Layout/SnackAlert'
 export default {
-  components: { sideBar, navBar },
+  components: { sideBar, navBar, SnackAlert },
   mixins: [isLogged],
   data: () => ({}),
   methods: {

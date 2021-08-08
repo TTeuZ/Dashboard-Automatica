@@ -91,7 +91,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['SET_LOADING']),
+    ...mapMutations(['SET_LOADING', 'SET_ALERT_DATA']),
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
@@ -142,6 +142,10 @@ export default {
             this.handlerUploadedFiles(this.files, res.key)
           }
           this.$refs.constructor.clearForm()
+          this.SET_ALERT_DATA({
+            text: this.pageSchema.title + ' foi criado com sucesso!',
+            color: 'green',
+          })
           this.$emit('update:isOpen', false)
         })
     },

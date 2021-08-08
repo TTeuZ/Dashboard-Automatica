@@ -4,12 +4,14 @@ const state = {
   isDataLoading: true,
   pageSchemaDefined: schema.modules.loading,
   sideBarItems: {},
+  alertData: {},
 }
 
 const getters = {
   isLoading: (state) => state.isDataLoading,
   pageSchema: (state) => state.pageSchemaDefined,
   sideItems: (state) => state.sideBarItems,
+  alertData: (state) => state.alertData,
 }
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   },
   SET_SIDE_BAR_ITEMS: (state, items) => {
     state.sideBarItems = items
+  },
+  SET_ALERT_DATA: (state, data) => {
+    state.alertData = data
   },
 }
 
