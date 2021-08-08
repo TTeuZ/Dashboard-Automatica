@@ -27,8 +27,7 @@ As funcioanlidades existentes são básicas, consistindo em:
 Como a idea deste projeto é criar as páginas de maneira dinâmica, neste json temos todas as configurações que são necessárias para a construção da pagina.
 
 Json Exemplo:
-
-`
+```
 const service = {
   title: 'Serviço', // Titulo da página, é exibido nos modais e no header
   name: 'service', // valor utilziado para realizar as requests ao firebase
@@ -139,4 +138,4 @@ const service = {
     },
   ],
 }
-`
+```
