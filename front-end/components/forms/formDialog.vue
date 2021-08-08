@@ -10,7 +10,11 @@
       <v-card-title class="card__title exo">
         {{ handlerTitle }}
       </v-card-title>
-      <form-constructor ref="constructor" :form-fields="pageSchema.form" />
+      <form-constructor
+        v-if="!isLoading"
+        ref="constructor"
+        :form-fields="pageSchema.form"
+      />
       <v-divider />
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -57,7 +61,6 @@ export default {
   },
   data() {
     return {
-      selectOptionsTrigger: false,
       files: null,
     }
   },
@@ -69,41 +72,11 @@ export default {
         : `Atualize o ${this.pageSchema.title}`
     },
   },
-  watch: {
-    pageSchema: {
-      handler() {
-        this.SET_LOADING(false)
-        this.selectOptionsTrigger = true
-      },
-    },
-    selectOptionsTrigger: {
-      handler() {
-        if (this.selectOptionsTrigger) {
-          this.pageSchema.form.forEach((field, index) => {
-            if (field.type === 'vSelect') {
-              if (field.dataCameFromOtside)
-                this.getDataFromOutside(field, index)
-            }
-          })
-        }
-        this.selectOptionsTrigger = false
-      },
-    },
-  },
   methods: {
     ...mapMutations(['SET_LOADING', 'SET_ALERT_DATA']),
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
-    },
-    getDataFromOutside(field, index) {
-      database.child(field.dataFont).on('value', (snap) =>
-        this.$store.dispatch('handlerSelectOptions', {
-          items: snap.val(),
-          label: field.dataLabel,
-          index,
-        })
-      )
     },
     handlerUploadedFiles(item, id) {
       item.value.forEach((file) => {

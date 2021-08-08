@@ -24,9 +24,15 @@ import { mapGetters, mapMutations } from 'vuex'
 import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 import addBtn from '../components/header/addBtn.vue'
 import search from '../components/header/search.vue'
+import { database } from '~/store/api/firebase'
 import vtable from '~/components/Table.vue'
 export default {
   components: { SelfBuildingSquareSpinner, addBtn, search, vtable },
+  data() {
+    return {
+      selectOptionsTrigger: false,
+    }
+  },
   computed: {
     ...mapGetters(['isLoading', 'pageSchema']),
     entity() {
@@ -39,7 +45,21 @@ export default {
     },
     pageSchema: {
       handler() {
+        this.selectOptionsTrigger = true
+      },
+    },
+    selectOptionsTrigger: {
+      handler() {
+        if (this.selectOptionsTrigger) {
+          this.pageSchema.form.forEach((field, index) => {
+            if (field.type === 'vSelect') {
+              if (field.dataCameFromOtside)
+                this.getDataFromOutside(field, index)
+            }
+          })
+        }
         this.SET_LOADING(false)
+        this.selectOptionsTrigger = false
       },
     },
   },
@@ -52,6 +72,15 @@ export default {
     ...mapMutations(['SET_PAGE_SCHEMA', 'SET_LOADING']),
     sendSearch(search) {
       this.$refs.table.search = search
+    },
+    async getDataFromOutside(field, index) {
+      await database.child(field.dataFont).on('value', (snap) => {
+        this.$store.dispatch('handlerSelectOptions', {
+          items: snap.val(),
+          label: field.dataLabel,
+          index,
+        })
+      })
     },
   },
 }
