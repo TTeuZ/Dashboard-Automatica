@@ -10,7 +10,7 @@
         </v-col>
       </v-row>
       <v-row class="pa-0 ma-0" no-gutters>
-        <vtable ref="table" />
+        <vtable ref="table" :entity="entity" />
       </v-row>
     </div>
     <div v-else class="loading__gif">
@@ -58,8 +58,8 @@ export default {
             }
           })
         }
-        this.SET_LOADING(false)
         this.selectOptionsTrigger = false
+        this.SET_LOADING(false)
       },
     },
   },
