@@ -139,3 +139,10 @@ const service = {
   ],
 }
 ```
+
+OBS:  Para o correto funcionamento da renderização dos seletores e inputs de textos, é necessário enviar as keys deles da seguinte maneira:
+
+- Select = 'key: items'
+- files = 'key: files'
+
+isso ocorre por conta do funcionamento do v-data-table, o qual permite o bind de slots por meio do value indicado no header. Porem, isto faz com que não seja possível adicionar mais de um seletor/fileInput por entity.
