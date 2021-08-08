@@ -21,8 +21,29 @@ const testimony = {
     },
   ],
   table: {
-    headers: [],
-    items: [],
+    headers: [
+      {
+        text: 'Nome',
+        value: 'name',
+        sorteable: true,
+        align: 'start',
+        slot: false,
+      },
+      {
+        text: 'Descrição',
+        value: 'note',
+        sorteable: true,
+        align: 'start',
+        slot: false,
+      },
+      {
+        text: 'Items',
+        value: 'items',
+        sorteable: true,
+        align: 'start',
+        slot: true,
+      },
+    ],
     search: '',
     itemsPerPage: 15,
     multiSort: true,

@@ -27,18 +27,28 @@ const service = {
         value: 'name',
         sorteable: true,
         align: 'start',
+        slot: false,
       },
       {
-        text: 'Email',
-        value: 'email',
+        text: 'Arquivos',
+        value: 'files',
         sorteable: true,
         align: 'start',
+        slot: true,
       },
       {
-        text: 'mensagem',
-        value: 'message',
+        text: 'Descrição',
+        value: 'note',
         sorteable: true,
         align: 'start',
+        slot: false,
+      },
+      {
+        text: 'Items',
+        value: 'items',
+        sorteable: true,
+        align: 'start',
+        slot: true,
       },
     ],
     search: '',
@@ -51,19 +61,19 @@ const service = {
   },
   form: [
     {
-      key: 'name', // nome que vai para o bacno de dados
+      key: 'name',
       type: 'textInput',
       mask: '',
       label: 'Nome do Serviço',
-      rules: [(v) => !!v || 'Nome é obrigatorio'], // *regras especificas do tipo do componente*
+      rules: [(v) => !!v || 'Nome é obrigatorio'],
       value: '',
     },
     {
-      key: 'file', // vai ter que sofrer alterações para o tipo de save que a ecomp faz
+      key: 'file',
       type: 'upload',
       label: 'Imagem do serviço',
       multiple: true,
-      extension: '.png, .jpg', // Extensões que o input pode aceitar.
+      extension: '.png, .jpg',
       colorChip: 'orange',
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
@@ -75,33 +85,14 @@ const service = {
       rules: [(v) => !!v || 'Descrição é obrigatorio'],
       value: '',
     },
-    // {
-    //   key: 'items',
-    //   type: 'vSelect',
-    //   label: 'selecione o item',
-    //   isMultiple: false,
-    //   dataCameFromOtside: false,
-    //   items: [
-    //     {
-    //       label: 'teste',
-    //       value: 1,
-    //     },
-    //     {
-    //       label: 'teste2',
-    //       value: 2,
-    //     }, // pode ser preenchido pelo back caso necessário
-    //   ],
-    //   rules: [(v) => !!v || 'O arquivo é obrigatorio'],
-    //   value: '',
-    // },
     {
       key: 'items',
       type: 'vSelect',
       label: 'selecione o item',
       isMultiple: false,
-      dataCameFromOtside: true, // indica que as infos vão vir de uma rota
-      dataFont: 'testimony', // nome da entity que vai ser chamada
-      dataLabel: 'name', // valor que vai ser apresentado no label das opções
+      dataCameFromOtside: true,
+      dataFont: 'testimony',
+      dataLabel: 'name',
       items: null,
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
