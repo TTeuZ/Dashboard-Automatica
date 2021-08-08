@@ -1,4 +1,4 @@
-import { auth } from '../store/Api/firebase'
+import { auth } from '../store/api/firebase'
 
 export default (context) => {
   const { store } = context

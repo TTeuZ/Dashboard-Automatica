@@ -42,7 +42,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import formConstructor from '../forms/formConstructor.vue'
-import { database, storage } from '~/store/Api/firebase'
+import { database, storage } from '~/store/api/firebase'
 export default {
   components: { formConstructor },
   props: {
