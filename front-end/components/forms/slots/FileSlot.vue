@@ -1,5 +1,5 @@
 <template>
-  <div>files</div>
+  <div>file</div>
 </template>
 
 <script>

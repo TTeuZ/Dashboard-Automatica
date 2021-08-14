@@ -1,7 +1,7 @@
-import FilesSlot from './FilesSlot.vue'
-import SelectSlot from './SelectSlot.vue'
+import fileSlot from './FileSlot.vue'
+import selectSlot from './SelectSlot.vue'
 
 export default {
-  FilesSlot,
-  SelectSlot,
+  fileSlot,
+  selectSlot,
 }
