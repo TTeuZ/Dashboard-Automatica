@@ -27,9 +27,9 @@ export default {
     getSlotInfo(data) {
       if (this.slotConfig.externalFont) {
         this.getExternaData(this.slotConfig.externalEntity)
-        return this.getText(this.externalCorrectlyData)
+        return this.externalCorrectlyData
       } else {
-        return this.getText(data)
+        return data
       }
     },
     async getExternaData(entity) {
@@ -38,21 +38,11 @@ export default {
       })
     },
     getValues(entityData) {
-      const pushedData = []
-      this.slotData.forEach((data) => {
-        for (const item in entityData) {
-          if (item === data)
-            pushedData.push(entityData[item][this.slotConfig.externalLabel])
-        }
-      })
-      this.externalCorrectlyData = pushedData
-    },
-    getText(data) {
-      let text = ''
-      data.forEach((item, index) => {
-        text += index < data.length - 1 ? item + ', ' : item
-      })
-      return text
+      for (const item in entityData) {
+        if (item === this.slotData)
+          this.externalCorrectlyData =
+            entityData[item][this.slotConfig.externalLabel]
+      }
     },
   },
 }

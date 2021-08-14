@@ -33,7 +33,7 @@ const service = {
       },
       {
         text: 'Items Externos',
-        value: 'array-itemsExterno', // precisa mandar o 'array-' para o slot reconhcer
+        value: 'only-itemsExterno', // precisa mandar o 'array-' para o slot reconhcer
         externalFont: true, // indica se a fonte do seletor é externa
         externalEntity: 'testimony', // indica a entity responsavel pelas informaçoes
         externalLabel: 'name', // Nome do valor da fonte externa que será exibido
@@ -51,7 +51,7 @@ const service = {
       },
       {
         text: 'Items Internos',
-        value: 'array-itemsInterno',
+        value: 'only-itemsInterno',
         externalFont: false,
         sorteable: true,
         align: 'start',
@@ -186,7 +186,7 @@ const service = {
       key: 'itemsExterno',
       type: 'vSelect',
       label: 'selecione o item',
-      isMultiple: true,
+      isMultiple: false,
       dataCameFromOtside: true,
       dataFont: 'testimony',
       dataLabel: 'name',
@@ -225,3 +225,8 @@ export default service
 // '<NomeDoSlot>-<NomeDoCampoNoBack>', pois desta maneira, dentro do v-table, o componente ira pegar a posição [0] do split deste value para mandar na renderização dinâmica de componentes
 // ou seja, vai mandar o <NomeDoSlot>, e irá envia a porição [1] do value como props, ou seja 'item[<NomeDoCampoNoBack]', o que resultará nos valores corretas da coluna, renderizando assim
 // de maneira 100% dinamica, slots nas colunas com informaçôes corretas.
+
+// Slots:
+// array- para mostrar as informaçoes de field com a opção de multiplo ativado
+// file- para mostrar o slot para o campo de Arquivos
+// only- Para os seletores com a opção de multiplo desativado, isso para mostrar corretamente a info caso a fonte seja externa.
