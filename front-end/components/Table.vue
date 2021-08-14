@@ -21,7 +21,7 @@
         <div v-else :key="index">
           <component
             :is="handlerSlot(cSlot.value)"
-            :slot-data="item[cSlot.value]"
+            :slot-data="item[getCorrectValue(cSlot.value)]"
           />
         </div>
       </template>
@@ -68,12 +68,15 @@ export default {
       })
     },
     handlerSlot(slot) {
-      return slot === 'items' ? 'SelectSlot' : 'FilesSlot'
+      return slot.split('-')[0] + 'Slot'
     },
     getCorrectTableData(items) {
       for (const item in items) {
         this.fixedTableData.push(items[item])
       }
+    },
+    getCorrectValue(value) {
+      return value.split('-')[1]
     },
   },
 }

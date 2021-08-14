@@ -31,7 +31,7 @@ const service = {
       },
       {
         text: 'Arquivos',
-        value: 'files',
+        value: 'file-files', // precisa mandar o 'file-' para o slot reconhcer
         sorteable: true,
         align: 'start',
         slot: true,
@@ -45,7 +45,7 @@ const service = {
       },
       {
         text: 'Items',
-        value: 'items',
+        value: 'select-items', // precisa mandar o 'select-' para o slot reconhcer
         sorteable: true,
         align: 'start',
         slot: true,
@@ -89,7 +89,7 @@ const service = {
       key: 'items',
       type: 'vSelect',
       label: 'selecione o item',
-      isMultiple: false,
+      isMultiple: true,
       dataCameFromOtside: true,
       dataFont: 'testimony',
       dataLabel: 'name',
