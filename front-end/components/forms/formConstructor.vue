@@ -11,12 +11,9 @@
 </template>
 
 <script>
-import upload from '~/components/forms/fields/upload'
-import inputArea from '~/components/forms/fields/inputArea'
-import vSelect from '~/components/forms/fields/select'
-import textInput from '~/components/forms/fields/input'
+import fields from '~/components/forms/fields/index'
 export default {
-  components: { upload, inputArea, vSelect, textInput },
+  components: { ...fields },
   props: {
     formFields: {
       type: Array,

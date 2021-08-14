@@ -32,10 +32,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import { database } from '~/store/api/firebase'
-import SelectSlot from '~/components/forms/slots/SelectSlot'
-import FilesSlot from '~/components/forms/slots/FilesSlot'
+import slots from '~/components/forms/slots/index'
 export default {
-  components: { SelectSlot, FilesSlot },
+  components: { ...slots },
   props: {
     entity: {
       type: String,
