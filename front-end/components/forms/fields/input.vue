@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     v-model="inputData"
-    v-maska="component.mask"
+    v-mask="component.mask"
     :label="component.label"
     rounded
     outlined
@@ -15,8 +15,10 @@
 </template>
 
 <script>
+import { mask } from 'vue-the-mask'
 import { form } from '~/mixins/forms'
 export default {
+  directives: { mask },
   mixins: [form],
   props: {
     component: {

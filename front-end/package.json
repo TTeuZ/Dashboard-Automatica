@@ -18,8 +18,7 @@
     "firebase": "^8.4.1",
     "lodash": "^4.17.21",
     "nuxt": "^2.13.0",
-    "maska": "^1.4.1",
-    "v-mask": "^2.2.4"
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
