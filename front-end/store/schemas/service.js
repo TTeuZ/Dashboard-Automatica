@@ -25,13 +25,6 @@ const service = {
   table: {
     headers: [
       {
-        text: 'Nome',
-        value: 'name',
-        sorteable: true,
-        align: 'start',
-        slot: false,
-      },
-      {
         text: 'Arquivos',
         value: 'file-files', // precisa mandar o 'file-' para o slot reconhcer
         sorteable: true,
@@ -39,19 +32,66 @@ const service = {
         slot: true,
       },
       {
-        text: 'Descrição',
-        value: 'note',
-        sorteable: true,
-        align: 'start',
-        slot: false,
-      },
-      {
-        text: 'Items',
-        value: 'select-items', // precisa mandar o 'select-' para o slot reconhcer
+        text: 'Items Externos',
+        value: 'array-itemsExterno', // precisa mandar o 'array-' para o slot reconhcer
+        externalFont: true, // indica se a fonte do seletor é externa
+        externalEntity: 'testimony', // indica a entity responsavel pelas informaçoes
+        externalLabel: 'name', // Nome do valor da fonte externa que será exibido
         sorteable: true,
         align: 'start',
         slot: true,
       },
+      {
+        text: 'Checkbox',
+        value: 'array-checkbox', // precisa mandar o 'array-' para o slot reconhcer
+        externalFont: false,
+        sorteable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Items Internos',
+        value: 'array-itemsInterno',
+        externalFont: false,
+        sorteable: true,
+        align: 'start',
+        slot: true,
+      },
+      // {
+      //   text: 'Radio',
+      //   value: 'radio',
+      //   sorteable: true,
+      //   align: 'start',
+      //   slot: false,
+      // },
+      // {
+      //   text: 'Switch',
+      //   value: 'switch',
+      //   sorteable: true,
+      //   align: 'start',
+      //   slot: false,
+      // },
+      // {
+      //   text: 'Numero',
+      //   value: 'numero',
+      //   sorteable: true,
+      //   align: 'start',
+      //   slot: false,
+      // },
+      // {
+      //   text: 'Nome',
+      //   value: 'name',
+      //   sorteable: true,
+      //   align: 'start',
+      //   slot: false,
+      // },
+      // {
+      //   text: 'Descrição',
+      //   value: 'note',
+      //   sorteable: true,
+      //   align: 'start',
+      //   slot: false,
+      // },
     ],
     search: '',
     itemsPerPage: 15,

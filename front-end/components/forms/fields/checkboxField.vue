@@ -1,18 +1,4 @@
 <template>
-  <!-- <v-radio-group
-    v-model="inputData"
-    class="pt-0 mt-0"
-    row
-    @change="sendValue(component.key)"
-  >
-    <v-radio
-      v-for="(item, i) in component.items"
-      :key="i"
-      :color="component.color"
-      :label="item.label"
-      :value="item.value"
-    ></v-radio>
-  </v-radio-group> -->
   <div class="d-flex">
     <v-checkbox
       v-for="(item, i) in component.items"

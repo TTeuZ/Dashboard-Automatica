@@ -22,6 +22,7 @@
           <component
             :is="handlerSlot(cSlot.value)"
             :slot-data="item[getCorrectValue(cSlot.value)]"
+            :slot-config="cSlot"
           />
         </div>
       </template>

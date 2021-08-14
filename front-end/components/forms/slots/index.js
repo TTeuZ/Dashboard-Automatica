@@ -1,7 +1,7 @@
 import fileSlot from './FileSlot.vue'
-import selectSlot from './SelectSlot.vue'
+import arraySlot from './ArraySlot.vue'
 
 export default {
   fileSlot,
-  selectSlot,
+  arraySlot,
 }
