@@ -2,6 +2,7 @@ export const form = {
   data() {
     return {
       inputData: null,
+      checkboxData: [],
     }
   },
   methods: {
