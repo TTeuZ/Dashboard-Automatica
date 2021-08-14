@@ -1,3 +1,5 @@
+// Schema mais atualizado
+
 const service = {
   title: 'Serviço',
   name: 'service',
@@ -61,14 +63,67 @@ const service = {
   },
   form: [
     {
+      // Field de texto
       key: 'name',
       type: 'textInput',
-      mask: '',
       label: 'Nome do Serviço',
       rules: [(v) => !!v || 'Nome é obrigatorio'],
       value: '',
     },
     {
+      // Field de numero
+      key: 'numero',
+      type: 'numberInput',
+      mask: '###',
+      label: 'Numero',
+      rules: [(v) => !!v || 'Numero é obrigatorio'],
+      value: '',
+    },
+    {
+      // Field de switch
+      key: 'switch',
+      type: 'switchField',
+      label: 'Switch',
+      value: '',
+    },
+    {
+      // Field de radio
+      key: 'radio',
+      type: 'radio',
+      items: [
+        {
+          label: 'teste',
+          value: 1,
+        },
+        {
+          label: 'teste2',
+          value: 2,
+        },
+      ],
+      color: 'orange',
+      rules: [(v) => !!v || 'Radio é obrigatorio'],
+      value: '',
+    },
+    {
+      // Field de checkbox
+      key: 'checkbox',
+      type: 'checkbox',
+      items: [
+        {
+          label: 'teste check',
+          value: 1,
+          color: 'orange',
+        },
+        {
+          label: 'teste check2',
+          value: 2,
+          color: 'red',
+        },
+      ],
+      value: '',
+    },
+    {
+      // Field de arquivos
       key: 'file',
       type: 'upload',
       label: 'Imagem do serviço',
@@ -79,6 +134,7 @@ const service = {
       value: '',
     },
     {
+      // Field de textArea
       key: 'note',
       type: 'inputArea',
       label: 'Descrição do serviço',
@@ -86,7 +142,8 @@ const service = {
       value: '',
     },
     {
-      key: 'items',
+      // Field de seletor com infos de api externa
+      key: 'itemsExterno',
       type: 'vSelect',
       label: 'selecione o item',
       isMultiple: true,
@@ -94,6 +151,26 @@ const service = {
       dataFont: 'testimony',
       dataLabel: 'name',
       items: null,
+      rules: [(v) => !!v || 'O item é obrigatorio'],
+      value: '',
+    },
+    {
+      // Field de seletor com infos internas
+      key: 'itemsInterno',
+      type: 'vSelect',
+      label: 'selecione o item',
+      isMultiple: false,
+      dataCameFromOtside: false,
+      items: [
+        {
+          label: 'teste',
+          value: 1,
+        },
+        {
+          label: 'teste2',
+          value: 2,
+        },
+      ],
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
     },
@@ -101,3 +178,10 @@ const service = {
 }
 
 export default service
+
+// Funcionamento dos slots:
+// no componente de table, todas as colunas estão com slots, usando a booelana 'slot' eu identifico se eu quero renderizar um slot ou se apenas quero renderizar o texto
+// nos casos que eu quero renderizar o slot, o value no header precisa seguir o padro indicado:
+// '<NomeDoSlot>-<NomeDoCampoNoBack>', pois desta maneira, dentro do v-table, o componente ira pegar a posição [0] do split deste value para mandar na renderização dinâmica de componentes
+// ou seja, vai mandar o <NomeDoSlot>, e irá envia a porição [1] do value como props, ou seja 'item[<NomeDoCampoNoBack]', o que resultará nos valores corretas da coluna, renderizando assim
+// de maneira 100% dinamica, slots nas colunas com informaçôes corretas.
