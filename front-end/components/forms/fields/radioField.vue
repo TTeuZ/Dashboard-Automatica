@@ -1,10 +1,10 @@
 <template>
   <v-radio-group
-    v-model="inputData"
+    v-model="radioData"
     class="pt-0 mt-0"
     row
     :rules="component.rules"
-    @change="sendValue(component.key)"
+    @change="sendData()"
   >
     <v-radio
       v-for="(item, i) in component.items"
@@ -25,6 +25,12 @@ export default {
       type: Object,
       Required: true,
       default: () => {},
+    },
+  },
+  methods: {
+    sendData() {
+      this.inputData = this.radioData
+      this.sendValue(this.component.key)
     },
   },
 }

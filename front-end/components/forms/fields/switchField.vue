@@ -1,10 +1,10 @@
 <template>
   <v-switch
-    v-model="inputData"
+    v-model="switchData"
     :label="component.label"
     rounded
     class="pt-0 mt-0"
-    @change="sendValue(component.key)"
+    @change="sendData()"
   ></v-switch>
 </template>
 
@@ -17,6 +17,12 @@ export default {
       type: Object,
       Required: true,
       default: () => {},
+    },
+  },
+  methods: {
+    sendData() {
+      this.inputData = this.switchData
+      this.sendValue(this.component.key)
     },
   },
 }

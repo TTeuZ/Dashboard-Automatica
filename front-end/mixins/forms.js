@@ -3,6 +3,8 @@ export const form = {
     return {
       inputData: null,
       checkboxData: [],
+      radiodata: null,
+      swtichData: null,
     }
   },
   methods: {

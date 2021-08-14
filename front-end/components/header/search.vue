@@ -10,7 +10,6 @@
     clearable
     append-icon="mdi-folder-search-outline"
   />
-  <!-- trocar o v-model por uma mutation do vuex -->
 </template>
 
 <script>
