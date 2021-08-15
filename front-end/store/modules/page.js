@@ -12,6 +12,7 @@ const getters = {
   pageSchema: (state) => state.pageSchemaDefined,
   sideItems: (state) => state.sideBarItems,
   alertData: (state) => state.alertData,
+  pageEntity: (state) => state.pageSchemaDefined.name,
 }
 
 const mutations = {

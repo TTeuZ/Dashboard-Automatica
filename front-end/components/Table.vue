@@ -21,6 +21,7 @@
         <div v-else :key="index">
           <component
             :is="handlerSlot(cSlot.value)"
+            :id="item.id"
             :slot-data="item[getCorrectValue(cSlot.value)]"
             :slot-config="cSlot"
           />
@@ -73,7 +74,11 @@ export default {
     },
     getCorrectTableData(items) {
       for (const item in items) {
-        this.fixedTableData.push(items[item])
+        const correctItem = {
+          id: item,
+          ...items[item],
+        }
+        this.fixedTableData.push(correctItem)
       }
     },
     getCorrectValue(value) {

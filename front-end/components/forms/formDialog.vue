@@ -17,7 +17,7 @@
       />
       <v-divider />
       <v-card-actions>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           color="red accent-4"
           text
@@ -78,14 +78,14 @@ export default {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)
     },
-    handlerUploadedFiles(item, id) {
-      item.value.forEach((file) => {
+    async handlerUploadedFiles(item, id) {
+      await item.value.forEach((file) => {
         storage
-          .child(`${file.name}`)
+          .child(`${this.pageSchema.name}/${id}/${file.name}`)
           .put(file)
           .then(() => {
             storage
-              .child(`${file.name}`)
+              .child(`${this.pageSchema.name}/${id}/${file.name}`)
               .getDownloadURL()
               .then((res) => {
                 database.child(`${this.pageSchema.name}/${id}/files`).push(res)
