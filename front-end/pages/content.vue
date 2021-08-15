@@ -1,5 +1,11 @@
 <template>
   <v-container fluid>
+    <delete-dialog
+      ref="deleteDialog"
+      :is-open.sync="deleteDialog"
+      :message="message"
+      @delete="deleteEntityItem()"
+    />
     <div v-if="!isPageLoading">
       <v-row class="pa-0 ma-0 header d-flex">
         <v-col cols="12" md="12" lg="6" class="d-flex align-center">
@@ -10,7 +16,11 @@
         </v-col>
       </v-row>
       <v-row class="pa-0 ma-0" no-gutters>
-        <vtable ref="table" :entity="entity" />
+        <vtable
+          ref="table"
+          :entity="entity"
+          @onDelete="openDeleteDialog($event)"
+        />
       </v-row>
     </div>
     <div v-else>
@@ -24,17 +34,27 @@ import { mapGetters, mapMutations } from 'vuex'
 import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 import addBtn from '../components/header/addBtn.vue'
 import search from '../components/header/search.vue'
-import { database } from '~/store/api/firebase'
+import { database, storage } from '~/store/api/firebase'
+import DeleteDialog from '~/components/DeleteDialog'
 import vtable from '~/components/Table.vue'
 export default {
-  components: { SelfBuildingSquareSpinner, addBtn, search, vtable },
+  components: {
+    SelfBuildingSquareSpinner,
+    addBtn,
+    search,
+    vtable,
+    DeleteDialog,
+  },
   data() {
     return {
       selectOptionsTrigger: false,
+      deleteDialog: false,
+      itemInfo: [],
+      message: '',
     }
   },
   computed: {
-    ...mapGetters(['isPageLoading', 'pageSchema']),
+    ...mapGetters(['isPageLoading', 'pageSchema', 'pageEntity']),
     entity() {
       return this.$route.query.entity
     },
@@ -81,6 +101,34 @@ export default {
           index,
         })
       })
+    },
+    openDeleteDialog(info) {
+      this.itemInfo = info
+      this.message = `Realmente deseja deletar esse ${this.pageSchema.title}`
+      this.deleteDialog = true
+    },
+    deleteEntityItem() {
+      const hasFiles = this.itemInfo[1].some((item) => {
+        return item.value.includes('file')
+      })
+      database
+        .child(`${this.pageEntity}/${this.itemInfo[0]}`)
+        .set(null)
+        .then(() => {
+          if (hasFiles) {
+            storage
+              .child(`${this.pageEntity}/${this.itemInfo[0]}`)
+              .listAll()
+              .then((res) => {
+                const promises = res.items.map((item) => {
+                  return item.delete()
+                })
+                Promise.all(promises)
+                this.deleteDialog = false
+                this.$refs.deleteDialog.loading = false
+              })
+          }
+        })
     },
   },
 }

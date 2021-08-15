@@ -6,7 +6,7 @@
       :items-per-page="pageSchema.table.itemsPerPage"
       :multi-sort="pageSchema.table.multiSort"
       :search="search"
-      :headers="pageSchema.table.headers"
+      :headers="tableHeaders"
       :items="fixedTableData"
       :mobile-breakpoint="pageSchema.table.mobileBreakPoint"
       :no-data-text="pageSchema.table.noDataText"
@@ -29,12 +29,23 @@
           />
         </div>
       </template>
+      <template v-slot:[`item.functions`]="{ item }">
+        <v-icon
+          class="function__icon"
+          color="error"
+          medium
+          @click="deleteItem(item.id)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
     </v-data-table>
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex'
+import cloneDeep from 'lodash/cloneDeep'
 import { database } from '~/store/api/firebase'
 import slots from '~/components/forms/slots/index'
 export default {
@@ -49,6 +60,7 @@ export default {
     return {
       search: '',
       fixedTableData: [],
+      tableHeaders: [],
     }
   },
   computed: {
@@ -58,11 +70,13 @@ export default {
     entity: {
       handler() {
         this.getTableData()
+        this.getTableHeaders()
       },
     },
   },
   mounted() {
     this.getTableData()
+    this.getTableHeaders()
   },
   methods: {
     ...mapMutations(['SET_TABLE_LOADING']),
@@ -86,14 +100,30 @@ export default {
       }
       this.SET_TABLE_LOADING(false)
     },
+    getTableHeaders() {
+      this.tableHeaders = cloneDeep(this.pageSchema.table.headers)
+      this.tableHeaders.push({
+        value: 'functions',
+        slot: false,
+        align: 'center',
+        sortable: false,
+      })
+    },
     getCorrectValue(value) {
       return value.split('-')[1]
     },
     handlerSlotData(data) {
       return data === undefined ? [] : data
     },
+    deleteItem(id) {
+      this.$emit('onDelete', [id, this.pageSchema.table.headers])
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.function__icon {
+  cursor: pointer;
+}
+</style>
