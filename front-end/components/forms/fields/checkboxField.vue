@@ -24,6 +24,9 @@ export default {
       default: () => {},
     },
   },
+  mounted() {
+    this.sendData()
+  },
   methods: {
     sendData() {
       this.inputData = this.checkboxData
