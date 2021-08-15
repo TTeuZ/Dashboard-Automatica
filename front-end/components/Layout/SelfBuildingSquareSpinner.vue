@@ -1,15 +1,17 @@
 // Componente copiado de https://epic-spinners.epicmax.co/?ref=madewithvuejs.com
 <template>
-  <div class="self-building-square-spinner">
-    <div class="square"></div>
-    <div class="square"></div>
-    <div class="square"></div>
-    <div class="square clear"></div>
-    <div class="square"></div>
-    <div class="square"></div>
-    <div class="square clear"></div>
-    <div class="square"></div>
-    <div class="square"></div>
+  <div class="loading__gif">
+    <div class="self-building-square-spinner">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square clear"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square clear"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +20,12 @@ export default {}
 </script>
 
 <style scoped>
+.loading__gif {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 .self-building-square-spinner,
 .self-building-square-spinner * {
   box-sizing: border-box;

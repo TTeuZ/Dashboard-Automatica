@@ -5,7 +5,12 @@
         Excluir
       </v-card-title>
       <v-card-text>
-        {{ message }}
+        <div v-if="!loading">
+          {{ message }}
+        </div>
+        <div v-else class="py-6">
+          <self-building-square-spinner />
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -24,7 +29,7 @@
           rounded
           depressed
           small
-          @click="$emit('delete')"
+          @click="onDelete"
         >
           Deletar
         </v-btn>
@@ -34,7 +39,9 @@
 </template>
 
 <script>
+import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 export default {
+  components: { SelfBuildingSquareSpinner },
   props: {
     isOpen: {
       type: Boolean,
@@ -43,6 +50,17 @@ export default {
     message: {
       type: String,
       required: true,
+    },
+  },
+  data() {
+    return {
+      loading: false,
+    }
+  },
+  methods: {
+    onDelete() {
+      this.loading = true
+      this.$emit('delete')
     },
   },
 }

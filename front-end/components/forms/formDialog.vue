@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-if="!isLoading"
+    v-if="!isPageLoading"
     v-model="isOpen"
     persistent
     overlay-opacity="0"
@@ -11,7 +11,7 @@
         {{ handlerTitle }}
       </v-card-title>
       <form-constructor
-        v-if="!isLoading"
+        v-if="!isPageLoading"
         ref="constructor"
         :form-fields="pageSchema.form"
       />
@@ -65,7 +65,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['pageSchema', 'isLoading']),
+    ...mapGetters(['pageSchema', 'isPageLoading']),
     handlerTitle() {
       return this.method === 'create'
         ? `Adicione um ${this.pageSchema.title}`
@@ -73,7 +73,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['SET_LOADING', 'SET_ALERT_DATA']),
+    ...mapMutations(['SET_ALERT_DATA']),
     cancel() {
       this.$refs.constructor.clearForm()
       this.$emit('update:isOpen', false)

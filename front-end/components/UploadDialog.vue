@@ -5,29 +5,34 @@
         Adicione arquivos
       </v-card-title>
       <v-card-text class="mt-3 pb-0">
-        <v-form ref="form">
-          <v-file-input
-            v-model="files"
-            :label="config.label"
-            :accept="config.extension"
-            :rules="config.rules"
-            :multiple="config.multiple"
-            dense
-            show-size
-            counter
-            chips
-            outlined
-            rounded
-            required
-            clearable
-          >
-            <template v-slot:selection="{ text }">
-              <v-chip small label :color="config.colorChip">
-                {{ text }}
-              </v-chip>
-            </template>
-          </v-file-input>
-        </v-form>
+        <div v-if="!loading">
+          <v-form ref="form">
+            <v-file-input
+              v-model="files"
+              :label="config.label"
+              :accept="config.extension"
+              :rules="config.rules"
+              :multiple="config.multiple"
+              dense
+              show-size
+              counter
+              chips
+              outlined
+              rounded
+              required
+              clearable
+            >
+              <template v-slot:selection="{ text }">
+                <v-chip small label :color="config.colorChip">
+                  {{ text }}
+                </v-chip>
+              </template>
+            </v-file-input>
+          </v-form>
+        </div>
+        <div v-else class="py-6 my-6">
+          <self-building-square-spinner />
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
@@ -58,6 +63,7 @@ export default {
   data() {
     return {
       files: null,
+      loading: false,
     }
   },
   methods: {
@@ -67,6 +73,7 @@ export default {
     },
     sendValues() {
       if (this.$refs.form.validate()) {
+        this.loading = true
         this.$emit('sendFiles', this.files)
       }
     },
