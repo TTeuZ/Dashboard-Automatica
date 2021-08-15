@@ -6,7 +6,7 @@
 export default {
   props: {
     slotData: {
-      type: [Number, String, Array, Object],
+      type: [Number, String, Array, Object, Boolean],
       required: true,
     },
     slotConfig: {
