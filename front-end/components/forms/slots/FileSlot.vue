@@ -184,8 +184,8 @@ export default {
               .getDownloadURL()
               .then((res) => {
                 database.child(`${this.pageEntity}/${this.id}/files`).push(res)
+                this.uploadDialog = false
               })
-            this.uploadDialog = false
           })
       })
     },

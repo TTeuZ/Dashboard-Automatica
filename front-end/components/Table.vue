@@ -12,6 +12,8 @@
       :no-data-text="pageSchema.table.noDataText"
       :no-results-text="pageSchema.table.noResultText"
       :dense="pageSchema.table.dense"
+      :loading="isTableLoading"
+      loading-text="Carregando items"
     >
       <template
         v-for="(cSlot, index) in pageSchema.table.headers"
@@ -32,7 +34,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import { database } from '~/store/api/firebase'
 import slots from '~/components/forms/slots/index'
 export default {
@@ -50,7 +52,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['pageSchema']),
+    ...mapGetters(['pageSchema', 'isTableLoading']),
   },
   watch: {
     entity: {
@@ -63,7 +65,9 @@ export default {
     this.getTableData()
   },
   methods: {
+    ...mapMutations(['SET_TABLE_LOADING']),
     getTableData() {
+      this.SET_TABLE_LOADING(true)
       database.child(this.entity).on('value', (snap) => {
         this.fixedTableData = []
         this.getCorrectTableData(snap.val())
@@ -80,6 +84,7 @@ export default {
         }
         this.fixedTableData.push(correctItem)
       }
+      this.SET_TABLE_LOADING(false)
     },
     getCorrectValue(value) {
       return value.split('-')[1]

@@ -2,13 +2,15 @@ import schema from '../schemas'
 
 const state = {
   isDataLoading: true,
+  isTableLoading: null,
   pageSchemaDefined: schema.modules.loading,
   sideBarItems: {},
   alertData: {},
 }
 
 const getters = {
-  isLoading: (state) => state.isDataLoading,
+  isPageLoading: (state) => state.isDataLoading,
+  isTableLoading: (state) => state.isTableLoading,
   pageSchema: (state) => state.pageSchemaDefined,
   sideItems: (state) => state.sideBarItems,
   alertData: (state) => state.alertData,
@@ -16,8 +18,11 @@ const getters = {
 }
 
 const mutations = {
-  SET_LOADING: (state, payload) => {
+  SET_PAGE_LOADING: (state, payload) => {
     state.isDataLoading = payload
+  },
+  SET_TABLE_LOADING: (state, payload) => {
+    state.isTableLoading = payload
   },
   SET_PAGE_SCHEMA: (state, payload) => {
     state.pageSchemaDefined = schema.modules[payload]

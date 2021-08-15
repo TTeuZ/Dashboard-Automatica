@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <div v-if="!isLoading">
+    <div v-if="!isPageLoading">
       <v-row class="pa-0 ma-0 header d-flex">
         <v-col cols="12" md="12" lg="6" class="d-flex align-center">
           <addBtn v-if="pageSchema.showAdd"
@@ -13,7 +13,7 @@
         <vtable ref="table" :entity="entity" />
       </v-row>
     </div>
-    <div v-else class="loading__gif">
+    <div v-else>
       <self-building-square-spinner />
     </div>
   </v-container>
@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isLoading', 'pageSchema']),
+    ...mapGetters(['isPageLoading', 'pageSchema']),
     entity() {
       return this.$route.query.entity
     },
@@ -59,7 +59,7 @@ export default {
           })
         }
         this.selectOptionsTrigger = false
-        this.SET_LOADING(false)
+        this.SET_PAGE_LOADING(false)
       },
     },
   },
@@ -69,7 +69,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_PAGE_SCHEMA', 'SET_LOADING']),
+    ...mapMutations(['SET_PAGE_SCHEMA', 'SET_PAGE_LOADING']),
     sendSearch(search) {
       this.$refs.table.search = search
     },
@@ -87,12 +87,6 @@ export default {
 </script>
 
 <style scoped>
-.loading__gif {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 @media screen and (max-width: 1265px) {
   .header {
     flex-direction: column-reverse;
