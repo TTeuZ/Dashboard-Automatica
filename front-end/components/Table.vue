@@ -22,7 +22,7 @@
           <component
             :is="handlerSlot(cSlot.value)"
             :id="item.id"
-            :slot-data="item[getCorrectValue(cSlot.value)]"
+            :slot-data.sync="item[getCorrectValue(cSlot.value)]"
             :slot-config="cSlot"
           />
         </div>
@@ -50,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['pageSchema', 'tableData']),
+    ...mapGetters(['pageSchema']),
   },
   watch: {
     entity: {

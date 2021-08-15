@@ -2,7 +2,6 @@
   <v-file-input
     v-model="inputData"
     :label="component.label"
-    :color="component.color"
     :accept="component.extension"
     :rules="component.rules"
     :multiple="component.multiple"

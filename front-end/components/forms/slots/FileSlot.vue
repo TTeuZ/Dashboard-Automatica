@@ -5,6 +5,11 @@
       :message="message"
       @delete="deleteFile()"
     />
+    <upload-dialog
+      :is-open.sync="uploadDialog"
+      :config="formConfig"
+      @sendFiles="sendFiles($event)"
+    />
     <div
       class="d-flex flex-column files__wrapper"
       @click="isFilesDialogOpen = true"
@@ -14,7 +19,7 @@
     </div>
     <v-dialog
       v-model="isFilesDialogOpen"
-      max-width="1200"
+      max-width="600"
       no-click-animation
       persistent
     >
@@ -22,59 +27,40 @@
         <v-card-title>
           <span>Arquivos </span>
           <v-spacer />
-          <v-btn fab depressed color="success" x-small
-            ><v-icon>mdi-plus</v-icon></v-btn
+          <v-btn
+            v-if="formConfig.multiple || !slotData"
+            fab
+            depressed
+            color="success"
+            x-small
+            @click="uploadDialog = true"
           >
+            <v-icon>mdi-plus</v-icon>
+          </v-btn>
         </v-card-title>
+        <v-card-subtitle>
+          Clique no item para vizualiza-lo
+        </v-card-subtitle>
         <v-card-text>
           <v-row no-gutters>
-            <v-col
-              v-if="images.length !== 0"
-              class="files__column"
-              cols="12"
-              md="6"
-            >
-              <span class="files__title">Imagens</span>
-              <div>
-                <v-img
-                  v-for="(image, i) in images"
-                  :key="i"
-                  contain
-                  max-width="200"
-                  max-height="200"
-                  class="image"
-                  :src="image"
-                >
-                  <span class="red--text pr-3 image__delete">
-                    x
-                  </span>
-                </v-img>
-              </div>
-            </v-col>
-            <v-col
-              v-if="docs.length !== 0"
-              class="files__column"
-              cols="12"
-              md="6"
-            >
-              <span class="files__title">Docs</span>
+            <v-col v-if="files.length !== 0" class="files__column" cols="12">
               <div>
                 <v-card
-                  v-for="(doc, d) in docs"
-                  :key="d"
+                  v-for="(file, f) in files"
+                  :key="f"
                   class="my-2 docs__wrapper"
                 >
-                  <a :href="doc" class="docs__wrapper" target="_blank">
+                  <a :href="file.path" class="docs__wrapper" target="_blank">
                     <div class="pl-2">
-                      <v-icon class="pr-1 icon"
-                        >mdi-file-document-multiple-outline</v-icon
-                      >
-                      <span>{{ getName(doc.path) }}</span>
+                      <v-icon class="pr-1 icon">{{
+                        handlerIcon(file.path)
+                      }}</v-icon>
+                      <span>{{ getName(file.path) }}</span>
                     </div>
                   </a>
                   <span
-                    class="red--text pr-3"
-                    @click="openDeleteDialog(doc.id, doc.path)"
+                    class="red--text pr-3 text__delete"
+                    @click="openDeleteDialog(file.id, file.path)"
                   >
                     x
                   </span>
@@ -97,8 +83,9 @@
 import { mapGetters } from 'vuex'
 import { storage, database } from '~/store/api/firebase'
 import DeleteDialog from '~/components/DeleteDialog'
+import UploadDialog from '~/components/UploadDialog'
 export default {
-  components: { DeleteDialog },
+  components: { DeleteDialog, UploadDialog },
   props: {
     slotData: {
       type: [Number, String, Array, Object],
@@ -118,33 +105,45 @@ export default {
     return {
       isFilesDialogOpen: false,
       deleteDialog: false,
-      docs: [],
-      images: [],
+      uploadDialog: false,
+      files: [],
       message: '',
       selectedId: '',
       path: '',
     }
   },
   computed: {
-    ...mapGetters(['pageEntity']),
+    ...mapGetters(['pageEntity', 'pageSchema']),
+    formConfig() {
+      return this.pageSchema.form.filter((item) => item.type === 'upload')[0]
+    },
+  },
+  watch: {
+    slotData: {
+      handler(newValue) {
+        this.handlerFiles(newValue)
+      },
+    },
   },
   mounted() {
     this.handlerFiles(this.slotData)
   },
   methods: {
     handlerFiles(data) {
-      this.docs = []
-      this.images = []
+      this.files = []
       for (const item in data) {
-        const type = data[item]
-          .split('/o/')[1]
-          .split('.')[1]
-          .split('?')[0]
-          .toLowerCase()
-        type === 'pdf'
-          ? this.docs.push({ path: data[item], id: item })
-          : this.images.push(data[item])
+        this.files.push({ path: data[item], id: item })
       }
+    },
+    handlerIcon(path) {
+      const fileType = this.getName(path).split('.')[1].toLowerCase()
+      let icon = ''
+      if (fileType === 'png' || fileType === 'jpg' || fileType === 'jpeg') {
+        icon = 'mdi-camera'
+      } else {
+        icon = 'mdi-file-document-multiple-outline'
+      }
+      return icon
     },
     getPath(file) {
       const filePath = file.split('/o/')[1].split('?')[0].replaceAll('%2F', '/')
@@ -172,8 +171,23 @@ export default {
             this.deleteDialog = false
           })
       })
-      delete this.slotData[this.selectedId]
       this.handlerFiles(this.slotData)
+    },
+    async sendFiles(files) {
+      await files.forEach((file) => {
+        storage
+          .child(`${this.pageEntity}/${this.id}/${file.name}`)
+          .put(file)
+          .then(() => {
+            storage
+              .child(`${this.pageEntity}/${this.id}/${file.name}`)
+              .getDownloadURL()
+              .then((res) => {
+                database.child(`${this.pageEntity}/${this.id}/files`).push(res)
+              })
+            this.uploadDialog = false
+          })
+      })
     },
   },
 }
@@ -190,7 +204,6 @@ export default {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
-  min-height: 300px;
   height: auto;
   max-height: 600px;
 }
@@ -205,6 +218,9 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.text__delete {
+  cursor: pointer;
 }
 .image {
   width: 200px;

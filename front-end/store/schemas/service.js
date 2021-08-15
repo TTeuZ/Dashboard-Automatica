@@ -167,7 +167,7 @@ const service = {
       key: 'file',
       type: 'upload',
       label: 'Imagem do serviço',
-      multiple: true,
+      multiple: false,
       extension: '.*',
       colorChip: 'orange',
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
