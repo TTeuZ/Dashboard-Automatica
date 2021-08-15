@@ -1,11 +1,13 @@
 <template>
   <div>
     <delete-dialog
+      ref="deleteDialog"
       :is-open.sync="deleteDialog"
       :message="message"
       @delete="deleteFile()"
     />
     <upload-dialog
+      ref="uploadDialog"
       :is-open.sync="uploadDialog"
       :config="formConfig"
       @sendFiles="sendFiles($event)"
@@ -169,6 +171,7 @@ export default {
           .set(null)
           .then(() => {
             this.deleteDialog = false
+            this.$refs.deleteDialog.loading = false
           })
       })
       this.handlerFiles(this.slotData)
@@ -185,6 +188,8 @@ export default {
               .then((res) => {
                 database.child(`${this.pageEntity}/${this.id}/files`).push(res)
                 this.uploadDialog = false
+                this.$refs.uploadDialog.files = []
+                this.$refs.uploadDialog.loading = false
               })
           })
       })

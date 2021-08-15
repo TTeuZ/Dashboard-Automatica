@@ -1,39 +1,37 @@
 <template>
   <v-dialog v-model="isOpen" width="300" persistent>
     <v-card>
-      <v-card-title>
-        Excluir
-      </v-card-title>
-      <v-card-text>
-        <div v-if="!loading">
+      <div :class="{ background__blur: loading }">
+        <v-card-title>
+          Excluir
+        </v-card-title>
+        <v-card-text>
           {{ message }}
-        </div>
-        <div v-else class="py-6">
-          <self-building-square-spinner />
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer />
-        <v-btn
-          text
-          rounded
-          depressed
-          small
-          @click="$emit('update:isOpen', false)"
-        >
-          Cancelar
-        </v-btn>
-        <v-btn
-          color="red accent-4"
-          text
-          rounded
-          depressed
-          small
-          @click="onDelete"
-        >
-          Deletar
-        </v-btn>
-      </v-card-actions>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            text
+            rounded
+            depressed
+            small
+            @click="$emit('update:isOpen', false)"
+          >
+            Cancelar
+          </v-btn>
+          <v-btn
+            color="red accent-4"
+            text
+            rounded
+            depressed
+            small
+            @click="onDelete"
+          >
+            Deletar
+          </v-btn>
+        </v-card-actions>
+      </div>
+      <self-building-square-spinner v-if="loading" />
     </v-card>
   </v-dialog>
 </template>
@@ -66,4 +64,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.background__blur {
+  background-color: white;
+  filter: blur(3px);
+}
+</style>

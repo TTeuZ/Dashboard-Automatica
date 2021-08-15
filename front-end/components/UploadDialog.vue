@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="isOpen" width="500" persistent>
     <v-card>
-      <v-card-title>
-        Adicione arquivos
-      </v-card-title>
-      <v-card-text class="mt-3 pb-0">
-        <div v-if="!loading">
+      <div :class="{ background__blur: loading }">
+        <v-card-title>
+          Adicione arquivos
+        </v-card-title>
+        <v-card-text class="mt-3 pb-0">
           <v-form ref="form">
             <v-file-input
               v-model="files"
@@ -29,20 +29,32 @@
               </template>
             </v-file-input>
           </v-form>
-        </div>
-        <div v-else class="py-6 my-6">
-          <self-building-square-spinner />
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer />
-        <v-btn color="red accent-4" text rounded depressed small @click="close">
-          cancelar
-        </v-btn>
-        <v-btn color="success" text rounded depressed small @click="sendValues">
-          Adicionar
-        </v-btn>
-      </v-card-actions>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="red accent-4"
+            text
+            rounded
+            depressed
+            small
+            @click="close"
+          >
+            cancelar
+          </v-btn>
+          <v-btn
+            color="success"
+            text
+            rounded
+            depressed
+            small
+            @click="sendValues"
+          >
+            Adicionar
+          </v-btn>
+        </v-card-actions>
+      </div>
+      <self-building-square-spinner v-if="loading" />
     </v-card>
   </v-dialog>
 </template>
@@ -81,4 +93,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.background__blur {
+  background-color: white;
+  filter: blur(3px);
+}
+</style>
