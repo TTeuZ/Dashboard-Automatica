@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      files: null,
+      files: [],
       fields: [],
     }
   },
@@ -109,25 +109,29 @@ export default {
           if (item.type !== 'upload') {
             values[item.key] = item.value
           } else {
-            this.files = item
+            this.files.push(item)
           }
         })
         this.formMethod === 'create' ? this.save(values) : this.update(values)
       }
     },
     async handlerUploadedFiles(item, id) {
-      await item.value.forEach((file) => {
-        storage
-          .child(`${this.pageSchema.name}/${id}/${file.name}`)
-          .put(file)
-          .then(() => {
-            storage
-              .child(`${this.pageSchema.name}/${id}/${file.name}`)
-              .getDownloadURL()
-              .then((res) => {
-                database.child(`${this.pageSchema.name}/${id}/files`).push(res)
-              })
-          })
+      await item.forEach((files) => {
+        files.value.forEach((file) => {
+          storage
+            .child(`${this.pageSchema.name}/${id}/${file.name}`)
+            .put(file)
+            .then(() => {
+              storage
+                .child(`${this.pageSchema.name}/${id}/${file.name}`)
+                .getDownloadURL()
+                .then((res) => {
+                  database
+                    .child(`${this.pageSchema.name}/${id}/${files.key}`)
+                    .push(res)
+                })
+            })
+        })
       })
     },
     save(data) {

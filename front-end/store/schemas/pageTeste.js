@@ -1,15 +1,15 @@
 // Schema mais atualizado
 
-const service = {
-  title: 'Serviço',
-  name: 'service',
+const pageTeste = {
+  title: 'Pagina de testes',
+  name: 'pageTeste',
   showAdd: true,
   showSearch: true,
   sideBarItem: {
     icon: 'mdi-archive',
-    text: 'service',
+    text: 'Página de teste',
     path: '/content',
-    query: { entity: 'service' },
+    query: { entity: 'pageTeste' },
   },
   breadcrumbs: [
     {
@@ -18,14 +18,68 @@ const service = {
       href: '/',
     },
     {
-      text: 'Serviços',
+      text: 'Testes',
       disabled: true,
     },
   ],
   table: {
     headers: [
       {
-        text: 'Serviço',
+        text: 'Arquivos',
+        value: 'file-files', // precisa mandar o 'file-' para o slot reconhcer
+        sortable: false,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Items Externos',
+        value: 'only-itemsExterno', // precisa mandar o 'array-' para o slot reconhcer
+        externalFont: true, // indica se a fonte do seletor é externa
+        externalEntity: 'testimony', // indica a entity responsavel pelas informaçoes
+        externalLabel: 'name', // Nome do valor da fonte externa que será exibido
+        sortable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Checkbox',
+        value: 'array-checkbox', // precisa mandar o 'array-' para o slot reconhcer
+        externalFont: false,
+        sortable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Items Internos',
+        value: 'only-itemsInterno',
+        externalFont: false,
+        sortable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Radio',
+        value: 'radio',
+        sortable: true,
+        align: 'start',
+        slot: false,
+      },
+      {
+        text: 'Switch',
+        value: 'switch-switch',
+        sortable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
+        text: 'Numero',
+        value: 'numero',
+        sortable: true,
+        align: 'start',
+        slot: false,
+      },
+      {
+        text: 'Nome',
         value: 'name',
         sortable: true,
         align: 'start',
@@ -37,36 +91,6 @@ const service = {
         sortable: true,
         align: 'start',
         slot: false,
-      },
-      {
-        text: 'Imagens',
-        value: 'file-image', // precisa mandar o 'file-' para o slot reconhcer
-        sortable: false,
-        align: 'start',
-        slot: true,
-      },
-      {
-        text: 'Documentos',
-        value: 'file-documents', // precisa mandar o 'file-' para o slot reconhcer
-        sortable: false,
-        align: 'start',
-        slot: true,
-      },
-      {
-        text: 'Situação',
-        value: 'array-situation', // precisa mandar o 'array-' para o slot reconhcer
-        externalFont: false,
-        sortable: true,
-        align: 'start',
-        slot: true,
-      },
-      {
-        text: 'Ramo',
-        value: 'only-ramo',
-        externalFont: false,
-        sortable: true,
-        align: 'start',
-        slot: true,
       },
     ],
     search: '',
@@ -87,8 +111,42 @@ const service = {
       value: '',
     },
     {
+      // Field de numero
+      key: 'numero',
+      type: 'numberInput',
+      mask: '###',
+      label: 'Numero',
+      rules: [(v) => !!v || 'Numero é obrigatorio'],
+      value: '',
+    },
+    {
+      // Field de switch
+      key: 'switch',
+      type: 'switchField',
+      label: 'Switch',
+      value: '',
+    },
+    {
+      // Field de radio
+      key: 'radio',
+      type: 'radio',
+      items: [
+        {
+          label: 'teste',
+          value: 1,
+        },
+        {
+          label: 'teste2',
+          value: 2,
+        },
+      ],
+      color: 'orange',
+      rules: [(v) => !!v || 'Radio é obrigatorio'],
+      value: '',
+    },
+    {
       // Field de checkbox
-      key: 'situation',
+      key: 'checkbox',
       type: 'checkbox',
       items: [
         {
@@ -106,20 +164,9 @@ const service = {
     },
     {
       // Field de arquivos
-      key: 'image',
+      key: 'file',
       type: 'upload',
       label: 'Imagem do serviço',
-      multiple: true,
-      extension: '.png',
-      colorChip: 'orange',
-      rules: [(v) => !!v || 'O arquivo é obrigatorio'],
-      value: '',
-    },
-    {
-      // Field de arquivos
-      key: 'documents',
-      type: 'upload',
-      label: 'documentos do serviço',
       multiple: true,
       extension: '.*',
       colorChip: 'orange',
@@ -135,8 +182,21 @@ const service = {
       value: '',
     },
     {
+      // Field de seletor com infos de api externa
+      key: 'itemsExterno',
+      type: 'vSelect',
+      label: 'selecione o item',
+      isMultiple: false,
+      dataCameFromOtside: true,
+      dataFont: 'testimony',
+      dataLabel: 'name',
+      items: null,
+      rules: [(v) => !!v || 'O item é obrigatorio'],
+      value: '',
+    },
+    {
       // Field de seletor com infos internas
-      key: 'ramo',
+      key: 'itemsInterno',
       type: 'vSelect',
       label: 'selecione o item',
       isMultiple: false,
@@ -157,7 +217,7 @@ const service = {
   ],
 }
 
-export default service
+export default pageTeste
 
 // Funcionamento dos slots:
 // no componente de table, todas as colunas estão com slots, usando a booelana 'slot' eu identifico se eu quero renderizar um slot ou se apenas quero renderizar o texto

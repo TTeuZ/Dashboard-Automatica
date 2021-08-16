@@ -119,6 +119,9 @@ export default {
     formConfig() {
       return this.pageSchema.form.filter((item) => item.type === 'upload')[0]
     },
+    folderName() {
+      return this.slotConfig.value.split('-')[1]
+    },
   },
   watch: {
     slotData: {
@@ -167,7 +170,9 @@ export default {
       const fileRef = storage.child(this.path)
       fileRef.delete().then(() => {
         database
-          .child(`${this.pageEntity}/${this.id}/files/${this.selectedId}`)
+          .child(
+            `${this.pageEntity}/${this.id}/${this.folderName}/${this.selectedId}`
+          )
           .set(null)
           .then(() => {
             this.deleteDialog = false
@@ -186,7 +191,9 @@ export default {
               .child(`${this.pageEntity}/${this.id}/${file.name}`)
               .getDownloadURL()
               .then((res) => {
-                database.child(`${this.pageEntity}/${this.id}/files`).push(res)
+                database
+                  .child(`${this.pageEntity}/${this.id}/${this.folderName}`)
+                  .push(res)
                 this.uploadDialog = false
                 this.$refs.uploadDialog.files = []
                 this.$refs.uploadDialog.loading = false
