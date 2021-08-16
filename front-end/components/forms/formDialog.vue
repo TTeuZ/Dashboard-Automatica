@@ -13,7 +13,7 @@
       <form-constructor
         v-if="!isPageLoading"
         ref="constructor"
-        :form-fields="pageSchema.form"
+        :form-fields="fields"
       />
       <v-divider />
       <v-card-actions>
@@ -54,29 +54,66 @@ export default {
       type: Boolean,
       required: true,
     },
-    method: {
-      type: String,
-      required: true,
+    editItem: {
+      type: [Object, Array],
+      default: () => {},
     },
   },
   data() {
     return {
       files: null,
+      fields: [],
     }
   },
   computed: {
-    ...mapGetters(['pageSchema', 'isPageLoading']),
+    ...mapGetters(['pageSchema', 'isPageLoading', 'formMethod']),
     handlerTitle() {
-      return this.method === 'create'
+      return this.formMethod === 'create'
         ? `Adicione um ${this.pageSchema.title}`
         : `Atualize o ${this.pageSchema.title}`
     },
   },
+  watch: {
+    formMethod: {
+      handler(newValue) {
+        if (newValue === 'create') {
+          this.fields = this.pageSchema.form
+        } else if (newValue === 'update') {
+          this.fields = this.pageSchema.form.filter((item) => {
+            return item.type !== 'upload'
+          })
+          this.fillValues()
+        }
+      },
+    },
+  },
   methods: {
-    ...mapMutations(['SET_ALERT_DATA']),
+    ...mapMutations(['SET_ALERT_DATA', 'SET_FORM_METHOD']),
     cancel() {
       this.$refs.constructor.clearForm()
+      this.SET_FORM_METHOD('')
       this.$emit('update:isOpen', false)
+    },
+    fillValues() {
+      this.fields.forEach((field) => {
+        this.$store.dispatch('setValue', {
+          formKey: field.key,
+          value: this.editItem[field.key],
+        })
+      })
+    },
+    prepareToSave() {
+      const values = {}
+      if (this.$refs.constructor.$refs.form.validate()) {
+        this.pageSchema.form.forEach((item) => {
+          if (item.type !== 'upload') {
+            values[item.key] = item.value
+          } else {
+            this.files = item
+          }
+        })
+        this.formMethod === 'create' ? this.save(values) : this.update(values)
+      }
     },
     async handlerUploadedFiles(item, id) {
       await item.value.forEach((file) => {
@@ -93,19 +130,6 @@ export default {
           })
       })
     },
-    prepareToSave() {
-      const values = {}
-      if (this.$refs.constructor.$refs.form.validate()) {
-        this.pageSchema.form.forEach((item) => {
-          if (item.type !== 'upload') {
-            values[item.key] = item.value
-          } else {
-            this.files = item
-          }
-        })
-        this.save(values)
-      }
-    },
     save(data) {
       database
         .child(`${this.pageSchema.name}`)
@@ -117,6 +141,20 @@ export default {
           this.$refs.constructor.clearForm()
           this.SET_ALERT_DATA({
             text: this.pageSchema.title + ' foi criado com sucesso!',
+            color: 'green',
+          })
+          this.$emit('update:isOpen', false)
+        })
+    },
+    update(data) {
+      const fullData = Object.assign(this.editItem, data)
+      database
+        .child(`${this.pageSchema.name}/${this.editItem.id}`)
+        .set(fullData)
+        .then(() => {
+          this.$refs.constructor.clearForm()
+          this.SET_ALERT_DATA({
+            text: this.pageSchema.title + ' foi editado com sucesso!',
             color: 'green',
           })
           this.$emit('update:isOpen', false)

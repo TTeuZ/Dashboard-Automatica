@@ -32,6 +32,14 @@
       <template v-slot:[`item.functions`]="{ item }">
         <v-icon
           class="function__icon"
+          color="primary"
+          medium
+          @click="updateItem(item)"
+        >
+          mdi-square-edit-outline
+        </v-icon>
+        <v-icon
+          class="function__icon"
           color="error"
           medium
           @click="deleteItem(item.id)"
@@ -117,6 +125,9 @@ export default {
     },
     deleteItem(id) {
       this.$emit('onDelete', [id, this.pageSchema.table.headers])
+    },
+    updateItem(item) {
+      this.$emit('onUpdate', item)
     },
   },
 }
