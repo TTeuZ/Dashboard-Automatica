@@ -3,6 +3,7 @@ import schema from '../schemas'
 const state = {
   isDataLoading: true,
   isTableLoading: null,
+  formMethod: '',
   pageSchemaDefined: schema.modules.loading,
   sideBarItems: {},
   alertData: {},

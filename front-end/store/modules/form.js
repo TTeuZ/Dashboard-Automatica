@@ -9,6 +9,13 @@ const mutations = {
   SET_SELECT_OPTIONS: (state, form) => {
     state.pageSchemaDefined.form[form.index].items = form.options
   },
+  SET_FORM_METHOD: (state, method) => {
+    state.formMethod = method
+  },
+}
+
+const getters = {
+  formMethod: (state) => state.formMethod,
 }
 
 const actions = {
@@ -33,6 +40,7 @@ const actions = {
 
 export default {
   state,
+  getters,
   mutations,
   actions,
 }
