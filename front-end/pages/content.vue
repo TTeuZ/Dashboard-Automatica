@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <form-dialog :is-open.sync="formDialog" :edit-item="itemInfo" />
     <delete-dialog
       ref="deleteDialog"
       :is-open.sync="deleteDialog"
@@ -9,8 +10,8 @@
     <div v-if="!isPageLoading">
       <v-row class="pa-0 ma-0 header d-flex">
         <v-col cols="12" md="12" lg="6" class="d-flex align-center">
-          <addBtn v-if="pageSchema.showAdd"
-        /></v-col>
+          <addBtn v-if="pageSchema.showAdd" @click="openAdd()" />
+        </v-col>
         <v-col cols="12" md="12" lg="6" class="d-flex align-center">
           <search v-if="pageSchema.showSearch" @change="sendSearch($event)" />
         </v-col>
@@ -20,6 +21,7 @@
           ref="table"
           :entity="entity"
           @onDelete="openDeleteDialog($event)"
+          @onUpdate="openEdit($event)"
         />
       </v-row>
     </div>
@@ -34,9 +36,10 @@ import { mapGetters, mapMutations } from 'vuex'
 import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 import addBtn from '../components/header/addBtn.vue'
 import search from '../components/header/search.vue'
-import { database, storage } from '~/store/api/firebase'
+import formDialog from '~/components/forms/formDialog'
 import DeleteDialog from '~/components/DeleteDialog'
 import vtable from '~/components/Table.vue'
+import { database, storage } from '~/store/api/firebase'
 export default {
   components: {
     SelfBuildingSquareSpinner,
@@ -44,13 +47,16 @@ export default {
     search,
     vtable,
     DeleteDialog,
+    formDialog,
   },
   data() {
     return {
       selectOptionsTrigger: false,
       deleteDialog: false,
-      itemInfo: [],
+      formDialog: false,
+      itemInfo: null,
       message: '',
+      method: '',
     }
   },
   computed: {
@@ -89,7 +95,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_PAGE_SCHEMA', 'SET_PAGE_LOADING']),
+    ...mapMutations([
+      'SET_PAGE_SCHEMA',
+      'SET_PAGE_LOADING',
+      'SET_FORM_METHOD',
+      'SET_ALERT_DATA',
+    ]),
     sendSearch(search) {
       this.$refs.table.search = search
     },
@@ -106,6 +117,15 @@ export default {
       this.itemInfo = info
       this.message = `Realmente deseja deletar esse ${this.pageSchema.title}`
       this.deleteDialog = true
+    },
+    openAdd() {
+      this.SET_FORM_METHOD('create')
+      this.formDialog = true
+    },
+    openEdit(item) {
+      this.itemInfo = item
+      this.SET_FORM_METHOD('update')
+      this.formDialog = true
     },
     deleteEntityItem() {
       const hasFiles = this.itemInfo[1].some((item) => {
@@ -124,6 +144,10 @@ export default {
                   return item.delete()
                 })
                 Promise.all(promises)
+                this.SET_ALERT_DATA({
+                  text: this.pageSchema.title + ' foi deletado com sucesso!',
+                  color: 'green',
+                })
                 this.deleteDialog = false
                 this.$refs.deleteDialog.loading = false
               })
