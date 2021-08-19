@@ -22,7 +22,8 @@ const home = {
     noDataText: 'sem items',
     noResultText: 'sem resultados',
     dense: false,
-  }, // solução temporaria pq nao sei ainda como fazer o loading de carregamento do vuex bugar o data-table
+  },
+  form: [],
 }
 
 export default home

@@ -82,9 +82,9 @@ export default {
       },
     },
   },
-  mounted() {
-    this.getTableData()
-    this.getTableHeaders()
+  async mounted() {
+    await this.getTableData()
+    await this.getTableHeaders()
   },
   methods: {
     ...mapMutations(['SET_TABLE_LOADING']),

@@ -164,7 +164,7 @@ const pageTeste = {
     },
     {
       // Field de arquivos
-      key: 'file',
+      key: 'files',
       type: 'upload',
       label: 'Imagem do serviço',
       multiple: true,
