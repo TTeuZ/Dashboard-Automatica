@@ -1,19 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import home from './home'
-import testimony from './testimony'
-import service from './service'
 import loading from './loading'
 import pageTeste from './pageTeste'
+import testimony from './testimony'
+import service from './service'
+import projects from './projects'
+import sections from './sections'
 
 Vue.use(Vuex)
 
 export default {
   modules: {
     home,
-    testimony,
-    service,
     loading,
     pageTeste,
+    testimony,
+    service,
+    projects,
+    sections,
   },
 }

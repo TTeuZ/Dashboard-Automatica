@@ -1,13 +1,13 @@
-const service = {
-  title: 'Serviço',
-  name: 'service',
+const projects = {
+  title: 'Portfolio',
+  name: 'projects',
   showAdd: true,
   showSearch: true,
   sideBarItem: {
-    icon: 'mdi-archive',
-    text: 'Serviços',
+    icon: 'mdi-firework',
+    text: 'Portfolios',
     path: '/content',
-    query: { entity: 'service' },
+    query: { entity: 'projects' },
   },
   breadcrumbs: [
     {
@@ -16,7 +16,7 @@ const service = {
       href: '/',
     },
     {
-      text: 'Serviços',
+      text: 'Portfolio',
       disabled: true,
     },
   ],
@@ -35,14 +35,6 @@ const service = {
         sortable: true,
         align: 'start',
         slot: false,
-      },
-      {
-        text: 'Situação',
-        value: 'array-situation', // precisa mandar o 'array-' para o slot reconhcer
-        externalFont: false,
-        sortable: true,
-        align: 'start',
-        slot: true,
       },
       {
         text: 'Ramo',
@@ -74,31 +66,14 @@ const service = {
     {
       key: 'name',
       type: 'textInput',
-      label: 'Nome do Serviço',
+      label: 'Nome do Projeto',
       rules: [(v) => !!v || 'Nome é obrigatorio'],
-      value: '',
-    },
-    {
-      key: 'situation',
-      type: 'checkbox',
-      items: [
-        {
-          label: 'Disponível',
-          value: 'disponivel',
-          color: 'green',
-        },
-        {
-          label: 'Indisponível',
-          value: 'indisponível',
-          color: 'red',
-        },
-      ],
       value: '',
     },
     {
       key: 'image',
       type: 'upload',
-      label: 'Imagem do serviço',
+      label: 'Imagem do Projeto',
       multiple: true,
       extension: '.png, .jpg, .jpeg',
       colorChip: 'orange',
@@ -126,4 +101,4 @@ const service = {
   ],
 }
 
-export default service
+export default projects
