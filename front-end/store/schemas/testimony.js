@@ -38,7 +38,7 @@ const testimony = {
       },
       {
         text: 'Items',
-        value: 'items',
+        value: 'only-items',
         sorteable: true,
         align: 'start',
         slot: true,
@@ -54,18 +54,18 @@ const testimony = {
   },
   form: [
     {
-      key: 'name', // nome que vai para o bacno de dados
+      key: 'name',
       type: 'textInput',
       mask: '',
       label: 'Nome do Testemunho',
-      rules: [(v) => !!v || 'Nome é obrigatorio'], // *regras especificas do tipo do componente*
+      rules: [(v) => !!v || 'Nome é obrigatorio'],
       value: '',
     },
     {
       key: 'note',
       type: 'inputArea',
       label: 'Descrição do Testemunho',
-      extension: '.pdf', // Extensões que o input pode aceitar.
+      extension: '.pdf',
       colorChip: 'orange',
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',
@@ -84,7 +84,7 @@ const testimony = {
         {
           label: 'teste2',
           value: 2,
-        }, // pode ser preenchido pelo back caso necessário
+        },
       ],
       rules: [(v) => !!v || 'O arquivo é obrigatorio'],
       value: '',

@@ -6,7 +6,7 @@
     ></v-app-bar-nav-icon>
     <div>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
-      <v-breadcrumbs class="roboto pa-0" :items="pageSchema.breadcrumbs" />
+      <v-breadcrumbs class="poppins pa-0" :items="pageSchema.breadcrumbs" />
     </div>
     <v-spacer />
     <div class="slide__left d-flex">

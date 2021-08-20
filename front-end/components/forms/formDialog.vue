@@ -7,7 +7,7 @@
     width="800"
   >
     <v-card>
-      <v-card-title class="card__title roboto">
+      <v-card-title class="card__title poppins">
         {{ handlerTitle }}
       </v-card-title>
       <form-constructor

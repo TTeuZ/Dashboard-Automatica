@@ -19,7 +19,7 @@
           <v-list-item-icon>
             <v-icon v-text="item.icon" />
           </v-list-item-icon>
-          <v-list-item-content class="roboto">
+          <v-list-item-content class="poppins">
             <v-list-item-title class="sidebar__text" v-text="item.text" />
           </v-list-item-content>
         </v-list-item>
@@ -65,6 +65,6 @@ export default {
   );
 }
 .sidebar__text {
-  font-size: 17px !important;
+  font-size: 15px !important;
 }
 </style>
