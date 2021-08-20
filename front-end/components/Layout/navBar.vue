@@ -9,8 +9,12 @@
       <v-breadcrumbs class="roboto pa-0" :items="pageSchema.breadcrumbs" />
     </div>
     <v-spacer />
-    <span> Sair </span>
-    <v-icon @click="signOut()">mdi-logout</v-icon>
+    <div class="slide__left d-flex">
+      <div class="text">
+        <span class="mr-1 hidden"> Sair </span>
+      </div>
+      <v-icon class="icon" @click="signOut()">mdi-logout</v-icon>
+    </div>
   </v-app-bar>
 </template>
 
@@ -35,8 +39,31 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .app-bar.v-toolbar.v-app-bar {
   box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%);
+}
+.text {
+  width: auto;
+  overflow: hidden;
+}
+.hidden {
+  display: none;
+}
+.slide__left:hover {
+  .hidden {
+    display: initial;
+    animation: slide-left 0.5s;
+  }
+}
+@keyframes slide-left {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
 </style>
