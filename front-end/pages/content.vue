@@ -24,6 +24,7 @@
           @onUpdate="openEdit($event)"
         />
       </v-row>
+      <git-hub-link />
     </div>
     <div v-else>
       <self-building-square-spinner />
@@ -39,6 +40,7 @@ import search from '../components/header/search.vue'
 import formDialog from '~/components/forms/formDialog'
 import DeleteDialog from '~/components/DeleteDialog'
 import vtable from '~/components/Table.vue'
+import GitHubLink from '~/components/GitHubLink'
 import { database, storage } from '~/store/api/firebase'
 export default {
   components: {
@@ -48,6 +50,7 @@ export default {
     vtable,
     DeleteDialog,
     formDialog,
+    GitHubLink,
   },
   data() {
     return {
