@@ -19,8 +19,8 @@
           <v-list-item-icon>
             <v-icon v-text="item.icon" />
           </v-list-item-icon>
-          <v-list-item-content class="exo">
-            <v-list-item-title v-text="item.text" />
+          <v-list-item-content class="roboto">
+            <v-list-item-title class="sidebar__text" v-text="item.text" />
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -63,5 +63,8 @@ export default {
     rgba(0, 0, 0, 0) 6%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+.sidebar__text {
+  font-size: 17px !important;
 }
 </style>

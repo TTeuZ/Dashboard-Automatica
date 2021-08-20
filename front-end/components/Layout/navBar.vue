@@ -6,9 +6,10 @@
     ></v-app-bar-nav-icon>
     <div>
       <v-toolbar-title>{{ pageTitle }}</v-toolbar-title>
-      <v-breadcrumbs class="exo pa-0" :items="pageSchema.breadcrumbs" />
+      <v-breadcrumbs class="roboto pa-0" :items="pageSchema.breadcrumbs" />
     </div>
     <v-spacer />
+    <span> Sair </span>
     <v-icon @click="signOut()">mdi-logout</v-icon>
   </v-app-bar>
 </template>

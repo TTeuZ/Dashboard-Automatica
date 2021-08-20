@@ -7,7 +7,7 @@
     width="800"
   >
     <v-card>
-      <v-card-title class="card__title exo">
+      <v-card-title class="card__title roboto">
         {{ handlerTitle }}
       </v-card-title>
       <form-constructor

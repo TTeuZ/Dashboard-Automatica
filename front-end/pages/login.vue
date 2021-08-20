@@ -2,7 +2,7 @@
   <v-container class="total pa-0 ma-0" fluid>
     <v-row class="total ma-0 pa-0">
       <v-col md="6" class="preenchimento">
-        <span class="text exo">
+        <span class="text">
           Bem vindo
         </span>
       </v-col>

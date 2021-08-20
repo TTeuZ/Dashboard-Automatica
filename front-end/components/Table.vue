@@ -19,7 +19,9 @@
         v-for="(cSlot, index) in pageSchema.table.headers"
         v-slot:[`item.${cSlot.value}`]="{ item }"
       >
-        <span v-if="!cSlot.slot" :key="index"> {{ item[cSlot.value] }} </span>
+        <span v-if="!cSlot.slot" :key="index">
+          {{ item[cSlot.value] }}
+        </span>
         <div v-else :key="index">
           <component
             :is="handlerSlot(cSlot.value)"
