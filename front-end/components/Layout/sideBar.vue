@@ -16,12 +16,30 @@
           active-class="pageSelected"
           :to="{ path: item.path, query: item.query }"
         >
-          <v-list-item-icon>
-            <v-icon v-text="item.icon" />
-          </v-list-item-icon>
-          <v-list-item-content class="poppins">
-            <v-list-item-title class="sidebar__text" v-text="item.text" />
-          </v-list-item-content>
+          <div v-if="item.icon !== 'home'" class="d-flex">
+            <v-list-item-icon>
+              <v-icon v-text="item.icon" />
+            </v-list-item-icon>
+            <v-list-item-content class="poppins">
+              <v-list-item-title class="sidebar__text" v-text="item.text" />
+            </v-list-item-content>
+          </div>
+          <div v-else class="d-flex">
+            <v-list-item-icon>
+              <img
+                :src="require('@/static/K.png')"
+                alt="Logo do sistema"
+                class="logo__png"
+              />
+            </v-list-item-icon>
+            <v-list-item-content>
+              <img
+                :src="require('@/static/Kt.png')"
+                alt="Logo do sistema"
+                class="title__png"
+              />
+            </v-list-item-content>
+          </div>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -63,6 +81,13 @@ export default {
     rgba(0, 0, 0, 0) 6%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+.logo__png {
+  width: 24px !important;
+  height: 24px !important;
+}
+.title__png {
+  height: 24px !important;
 }
 .sidebar__text {
   font-size: 15px !important;
