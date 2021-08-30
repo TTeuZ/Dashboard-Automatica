@@ -58,8 +58,8 @@ export default {
 .pageSelected {
   background: -webkit-linear-gradient(
     bottom,
-    rgba(255, 99, 71, 100) 0%,
-    rgba(255, 99, 71, 100) 5%,
+    rgba(86, 92, 219, 100) 0%,
+    rgba(86, 92, 219, 100) 5%,
     rgba(0, 0, 0, 0) 6%,
     rgba(0, 0, 0, 0) 100%
   );
