@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<style script>
+<style lang="scss" script>
 .pageSelected {
   background: -webkit-linear-gradient(
     bottom,
@@ -81,6 +81,9 @@ export default {
     rgba(0, 0, 0, 0) 6%,
     rgba(0, 0, 0, 0) 100%
   );
+}
+.pageSelected .v-icon {
+  color: rgba(86, 92, 219, 100) !important;
 }
 .logo__png {
   width: 24px !important;
