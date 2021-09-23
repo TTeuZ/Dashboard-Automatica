@@ -106,7 +106,7 @@ const pageTeste = {
       // Field de texto
       key: 'name',
       type: 'textInput',
-      label: 'Nome do Serviço',
+      label: 'Nome do Teste',
       rules: [(v) => !!v || 'Nome é obrigatorio'],
       value: '',
     },
@@ -166,7 +166,7 @@ const pageTeste = {
       // Field de arquivos
       key: 'files',
       type: 'upload',
-      label: 'Imagem do serviço',
+      label: 'Imagem do teste',
       multiple: true,
       extension: '.*',
       colorChip: 'orange',
@@ -177,7 +177,7 @@ const pageTeste = {
       // Field de textArea
       key: 'note',
       type: 'inputArea',
-      label: 'Descrição do serviço',
+      label: 'Descrição do teste',
       rules: [(v) => !!v || 'Descrição é obrigatorio'],
       value: '',
     },
@@ -185,7 +185,7 @@ const pageTeste = {
       // Field de seletor com infos de api externa
       key: 'itemsExterno',
       type: 'vSelect',
-      label: 'selecione o item',
+      label: 'selecione o testemunho',
       isMultiple: false,
       dataCameFromOtside: true,
       dataFont: 'testimony',
@@ -218,15 +218,3 @@ const pageTeste = {
 }
 
 export default pageTeste
-
-// Funcionamento dos slots:
-// no componente de table, todas as colunas estão com slots, usando a booelana 'slot' eu identifico se eu quero renderizar um slot ou se apenas quero renderizar o texto
-// nos casos que eu quero renderizar o slot, o value no header precisa seguir o padro indicado:
-// '<NomeDoSlot>-<NomeDoCampoNoBack>', pois desta maneira, dentro do v-table, o componente ira pegar a posição [0] do split deste value para mandar na renderização dinâmica de componentes
-// ou seja, vai mandar o <NomeDoSlot>, e irá envia a porição [1] do value como props, ou seja 'item[<NomeDoCampoNoBack]', o que resultará nos valores corretas da coluna, renderizando assim
-// de maneira 100% dinamica, slots nas colunas com informaçôes corretas.
-
-// Slots:
-// array- para mostrar as informaçoes de field com a opção de multiplo ativado
-// file- para mostrar o slot para o campo de Arquivos
-// only- Para os seletores com a opção de multiplo desativado, isso para mostrar corretamente a info caso a fonte seja externa.

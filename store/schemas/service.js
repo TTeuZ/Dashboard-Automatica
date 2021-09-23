@@ -115,7 +115,7 @@ const service = {
     {
       key: 'ramo',
       type: 'vSelect',
-      label: 'selecione o item',
+      label: 'selecione a seção',
       isMultiple: true,
       dataCameFromOtside: true,
       dataFont: 'sections',
