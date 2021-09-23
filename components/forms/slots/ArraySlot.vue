@@ -25,15 +25,20 @@ export default {
   },
   methods: {
     getSlotInfo(data) {
-      if (this.slotConfig.externalFont) {
-        this.getExternaData(this.slotConfig.externalEntity)
-        return this.getText(this.externalCorrectlyData)
+      if (data) {
+        return this.slotConfig.externalFont
+          ? this.getFullExternalData()
+          : this.getText(data)
       } else {
-        return this.getText(data)
+        return []
       }
     },
-    async getExternaData(entity) {
-      await database.child(entity).on('value', (snap) => {
+    getFullExternalData() {
+      this.getExternalData(this.slotConfig.externalEntity)
+      return this.getText(this.externalCorrectlyData)
+    },
+    getExternalData(entity) {
+      database.child(entity).on('value', (snap) => {
         this.getValues(snap.val())
       })
     },
