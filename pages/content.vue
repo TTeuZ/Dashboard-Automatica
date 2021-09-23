@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import SelfBuildingSquareSpinner from '../components/Layout/SelfBuildingSquareSpinner.vue'
 import addBtn from '../components/header/addBtn.vue'
 import search from '../components/header/search.vue'
@@ -104,12 +104,13 @@ export default {
       'SET_FORM_METHOD',
       'SET_ALERT_DATA',
     ]),
+    ...mapActions(['handlerSelectOptions']),
     sendSearch(search) {
       this.$refs.table.search = search
     },
     async getDataFromOutside(field, index) {
       await database.child(field.dataFont).on('value', (snap) => {
-        this.$store.dispatch('handlerSelectOptions', {
+        this.handlerSelectOptions({
           items: snap.val(),
           label: field.dataLabel,
           index,
