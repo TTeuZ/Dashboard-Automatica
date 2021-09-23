@@ -8,6 +8,7 @@
       :color="item.color"
       :label="item.label"
       :value="item.value"
+      :rules="rules"
       @change="sendData()"
     ></v-checkbox>
   </div>
@@ -22,6 +23,14 @@ export default {
       type: Object,
       Required: true,
       default: () => {},
+    },
+  },
+  computed: {
+    rules() {
+      return [
+        this.checkboxData.length > 0 ||
+          'Pelo menos 1 item deve ser selecionado',
+      ]
     },
   },
   mounted() {
