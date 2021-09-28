@@ -86,6 +86,13 @@ const pageTeste = {
         slot: false,
       },
       {
+        text: 'Data',
+        value: 'array-date',
+        sortable: true,
+        align: 'start',
+        slot: true,
+      },
+      {
         text: 'Descrição',
         value: 'note',
         sortable: true,
@@ -117,6 +124,16 @@ const pageTeste = {
       mask: '###',
       label: 'Numero',
       rules: [(v) => !!v || 'Numero é obrigatorio'],
+      value: '',
+    },
+    // file de data
+    {
+      key: 'date',
+      type: 'date',
+      label: 'Data',
+      pickerColor: 'orange',
+      range: true,
+      rules: [(v) => !!v || 'data é obrigatorio'],
       value: '',
     },
     {

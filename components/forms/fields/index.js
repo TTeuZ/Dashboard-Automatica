@@ -6,6 +6,7 @@ import number from './numberField.vue'
 import switchField from './switchField.vue'
 import radio from './radioField.vue'
 import checkbox from './checkboxField.vue'
+import date from './dateField.vue'
 
 export default {
   textInput: input,
@@ -16,4 +17,5 @@ export default {
   switchField,
   radio,
   checkbox,
+  date,
 }
